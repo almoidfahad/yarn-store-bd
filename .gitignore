@@ -10,9 +10,12 @@
 # production
 /build
 
-# local env files (never commit real API keys!)
+# local env & private backup files (never commit real API keys or recovery codes!)
 .env
 .env*.local
+*recovery*
+*.secret*
+
 
 # vercel
 .vercel

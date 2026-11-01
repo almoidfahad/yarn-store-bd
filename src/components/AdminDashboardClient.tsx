@@ -308,7 +308,7 @@ export function AdminDashboardClient({
 
   return (
     <ContentProtectionShield scope="dashboard" liveSettings={db.securitySettings}>
-    <div className="min-h-screen flex bg-[#F3F6F4] text-[#17231C]">
+    <div className="ysb-admin-root min-h-screen flex bg-[#F3F6F4] text-[#17231C]">
       {/* Toast Notification */}
       {toast && (
         <div className="fixed bottom-5 right-5 z-50 bg-[#063B1B] text-white text-xs font-bold px-4 py-3 rounded-xl shadow-2xl border border-emerald-400/40 flex items-center gap-2">

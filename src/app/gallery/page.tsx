@@ -28,7 +28,6 @@ export default function GalleryPage() {
 
   return (
     <PublicShell>
-      <ContentProtectionShield scope="products">
         <section className="bg-[#063B1B] text-white py-14">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl space-y-2">
             <span className="text-xs font-extrabold uppercase tracking-wider text-amber-300">
@@ -99,7 +98,6 @@ export default function GalleryPage() {
             </div>
           </div>
         )}
-      </ContentProtectionShield>
     </PublicShell>
   );
 }

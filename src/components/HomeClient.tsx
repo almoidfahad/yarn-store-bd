@@ -268,7 +268,6 @@ export function HomeClient({
       {/* =====================================================================
           3. OUR PRODUCTS — Premium Yarn & Thread Collection (4 Cards + Botanical Accents)
       ===================================================================== */}
-      <ContentProtectionShield scope="products" initialSettings={initialSecuritySettings}>
       <section className="relative py-10 sm:py-14 overflow-hidden">
         {/* Subtle Botanical Leaf Line-Art Watermarks on Left & Right like Screenshot #1 */}
         <svg
@@ -352,7 +351,6 @@ export function HomeClient({
           </div>
         </div>
       </section>
-      </ContentProtectionShield>
 
       {/* =====================================================================
           4. ABOUT YARN STORE BD — 3-Column Layout with "Since 2010" Badge

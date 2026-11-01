@@ -60,7 +60,6 @@ export function ProductDetailClient({
   ];
 
   return (
-    <ContentProtectionShield scope="products" initialSettings={initialSecuritySettings}>
     <div className="bg-white">
       {/* Breadcrumb Bar */}
       <div className="bg-[#F5F8F5] border-b border-emerald-100 py-3 text-xs">
@@ -337,6 +336,5 @@ export function ProductDetailClient({
         </div>
       )}
     </div>
-    </ContentProtectionShield>
   );
 }

@@ -42,7 +42,6 @@ export function ProductsCatalogClient({
   });
 
   return (
-    <ContentProtectionShield scope="products" initialSettings={initialSecuritySettings}>
     <div>
       {/* Hero Banner */}
       <section className="bg-gradient-to-r from-[#053517] via-[#085D28] to-[#0B6E30] text-white py-12 sm:py-16">
@@ -206,6 +205,5 @@ export function ProductsCatalogClient({
         </div>
       </section>
     </div>
-    </ContentProtectionShield>
   );
 }

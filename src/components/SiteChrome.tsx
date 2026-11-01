@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
@@ -20,9 +20,12 @@ import {
   Sparkles,
   Printer,
   ShieldCheck,
+  Moon,
+  Sun,
 } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
 import { WebsiteQrCode } from './VisualBadges';
+import { ContentProtectionShield } from './ContentProtectionShield';
 import { CURRENCY_RATES, LANGUAGE_LABELS } from '@/lib/staticContent';
 import type { QuoteRecord } from '@/lib/db';
 
@@ -31,6 +34,8 @@ interface GlobalPrefsContextValue {
   setLang: (l: 'EN' | 'DE' | 'ES' | 'AR') => void;
   currency: 'USD' | 'EUR' | 'GBP';
   setCurrency: (c: 'USD' | 'EUR' | 'GBP') => void;
+  darkMode: boolean;
+  toggleDarkMode: () => void;
 }
 
 const GlobalPrefsContext = createContext<GlobalPrefsContextValue>({
@@ -38,6 +43,8 @@ const GlobalPrefsContext = createContext<GlobalPrefsContextValue>({
   setLang: () => {},
   currency: 'USD',
   setCurrency: () => {},
+  darkMode: false,
+  toggleDarkMode: () => {},
 });
 
 export function useGlobalPrefs() {
@@ -47,9 +54,43 @@ export function useGlobalPrefs() {
 export function GlobalPrefsProvider({ children }: { children: React.ReactNode }) {
   const [lang, setLang] = useState<'EN' | 'DE' | 'ES' | 'AR'>('EN');
   const [currency, setCurrency] = useState<'USD' | 'EUR' | 'GBP'>('USD');
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('ysb_color_mode');
+      if (saved === 'dark') {
+        setDarkMode(true);
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    } catch {
+      // Ignore storage access error
+    }
+  }, []);
+
+  const toggleDarkMode = () => {
+    setDarkMode((prev) => {
+      const next = !prev;
+      try {
+        localStorage.setItem('ysb_color_mode', next ? 'dark' : 'normal');
+      } catch {
+        // Ignore
+      }
+      if (next) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+      return next;
+    });
+  };
 
   return (
-    <GlobalPrefsContext.Provider value={{ lang, setLang, currency, setCurrency }}>
+    <GlobalPrefsContext.Provider
+      value={{ lang, setLang, currency, setCurrency, darkMode, toggleDarkMode }}
+    >
       {children}
     </GlobalPrefsContext.Provider>
   );
@@ -57,7 +98,7 @@ export function GlobalPrefsProvider({ children }: { children: React.ReactNode })
 
 export function PublicHeader() {
   const pathname = usePathname();
-  const { lang, setLang, currency, setCurrency } = useGlobalPrefs();
+  const { lang, setLang, currency, setCurrency, darkMode, toggleDarkMode } = useGlobalPrefs();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [prodDrop, setProdDrop] = useState(false);
   const [resDrop, setResDrop] = useState(false);
@@ -178,13 +219,23 @@ export function PublicHeader() {
         </div>
       </div>
 
-      {/* Main White Navigation Bar — Exact Match to Screenshot #1 */}
-      <div className="bg-white/98 backdrop-blur border-b border-slate-100">
+      {/* Main Navigation Bar — Supports Normal Light Mode & Luxury Dark Mode */}
+      <div
+        className={`backdrop-blur border-b transition-colors ${
+          darkMode
+            ? 'bg-[#081A10]/95 border-emerald-900/60 text-emerald-50'
+            : 'bg-white/98 border-slate-100'
+        }`}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[74px] flex items-center justify-between gap-4">
-          <BrandLogo theme="light" />
+          <BrandLogo theme={darkMode ? 'dark' : 'light'} />
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-6 text-[14px] font-semibold text-[#17231C]">
+          <nav
+            className={`hidden lg:flex items-center gap-6 text-[14px] font-semibold ${
+              darkMode ? 'text-emerald-50' : 'text-[#17231C]'
+            }`}
+          >
             <Link
               href="/"
               className={`py-2 relative transition-colors ${
@@ -367,8 +418,32 @@ export function PublicHeader() {
             </Link>
           </nav>
 
-          {/* Right Pill CTA + Mobile Hamburger */}
-          <div className="flex items-center gap-3">
+          {/* Right Dark/Normal Mode Toggle + Pill CTA + Mobile Hamburger */}
+          <div className="flex items-center gap-2.5">
+            <button
+              type="button"
+              onClick={toggleDarkMode}
+              aria-label={darkMode ? 'Switch to Normal Mode' : 'Switch to Dark Mode'}
+              title={darkMode ? 'Switch to Normal Mode' : 'Switch to Dark Mode'}
+              className={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-extrabold border transition-all ${
+                darkMode
+                  ? 'bg-[#12311F] hover:bg-[#19422A] text-amber-300 border-emerald-600/60 shadow-sm'
+                  : 'bg-[#ECF7EE] hover:bg-emerald-100 text-[#08752B] border-emerald-200'
+              }`}
+            >
+              {darkMode ? (
+                <>
+                  <Sun className="w-3.5 h-3.5 text-amber-300" />
+                  <span>Normal</span>
+                </>
+              ) : (
+                <>
+                  <Moon className="w-3.5 h-3.5 text-[#08752B]" />
+                  <span>Dark</span>
+                </>
+              )}
+            </button>
+
             <Link
               href="/request-quote"
               className="inline-flex items-center gap-2 bg-[#0A5C28] hover:bg-[#08752B] text-white text-sm font-semibold px-5 py-2.5 rounded-full shadow-sm transition-all"
@@ -741,12 +816,14 @@ export function FloatingExportAssistants() {
 export function PublicShell({ children }: { children: React.ReactNode }) {
   return (
     <GlobalPrefsProvider>
-      <div id="top" className="min-h-screen flex flex-col bg-white text-[#17231C]">
-        <PublicHeader />
-        <main className="flex-1">{children}</main>
-        <PublicFooter />
-        <FloatingExportAssistants />
-      </div>
+      <ContentProtectionShield scope="products">
+        <div id="top" className="ysb-public-root min-h-screen flex flex-col bg-white text-[#17231C]">
+          <PublicHeader />
+          <main className="flex-1">{children}</main>
+          <PublicFooter />
+          <FloatingExportAssistants />
+        </div>
+      </ContentProtectionShield>
     </GlobalPrefsProvider>
   );
 }

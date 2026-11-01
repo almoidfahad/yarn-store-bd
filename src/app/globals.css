@@ -9,19 +9,125 @@
     background-color: #FFFFFF;
   }
 
+  html.dark {
+    color: #ECFDF5;
+    background-color: #06130B;
+  }
+
   body {
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     -webkit-font-smoothing: antialiased;
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
 }
 
-/* Custom subtle scrollbars for CRM & Admin tables */
+/* =============================================================================
+   GLOBAL DARK MODE THEME FOR PUBLIC WEBSITE (.ysb-public-root inside html.dark)
+   Preserves 100% pixel-identical Normal Mode when html.dark is absent!
+============================================================================= */
+html.dark .ysb-public-root {
+  background-color: #06130B !important;
+  color: #E2F1E8 !important;
+}
+
+html.dark .ysb-public-root .bg-white {
+  background-color: #0C1F14 !important;
+  color: #ECFDF5 !important;
+}
+
+html.dark .ysb-public-root .bg-\[\#ECF7EE\],
+html.dark .ysb-public-root .bg-\[\#ECF6EE\],
+html.dark .ysb-public-root .bg-\[\#FAFDFB\],
+html.dark .ysb-public-root .bg-\[\#F5F8F5\],
+html.dark .ysb-public-root .bg-\[\#F6FAF7\],
+html.dark .ysb-public-root .bg-\[\#F5F9F6\],
+html.dark .ysb-public-root .bg-slate-50,
+html.dark .ysb-public-root .bg-slate-100 {
+  background-color: #10281A !important;
+  color: #D1FAE5 !important;
+}
+
+html.dark .ysb-public-root .border-slate-200,
+html.dark .ysb-public-root .border-slate-200\/85,
+html.dark .ysb-public-root .border-slate-100,
+html.dark .ysb-public-root .border-emerald-100,
+html.dark .ysb-public-root .border-emerald-200 {
+  border-color: #1D442C !important;
+}
+
+html.dark .ysb-public-root .text-\[\#10371E\],
+html.dark .ysb-public-root .text-\[\#17231C\],
+html.dark .ysb-public-root .text-slate-900,
+html.dark .ysb-public-root .text-slate-800 {
+  color: #F0FDF4 !important;
+}
+
+html.dark .ysb-public-root .text-slate-700,
+html.dark .ysb-public-root .text-slate-600,
+html.dark .ysb-public-root .text-slate-500 {
+  color: #A7C4B3 !important;
+}
+
+html.dark .ysb-public-root .text-\[\#08752B\] {
+  color: #4ADE80 !important;
+}
+
+html.dark .ysb-public-root input,
+html.dark .ysb-public-root textarea,
+html.dark .ysb-public-root select {
+  background-color: #091910;
+  color: #F0FDF4;
+  border-color: #235336;
+}
+
+/* Optional Dark Mode support inside Admin Dashboard (.ysb-admin-root) */
+html.dark .ysb-admin-root {
+  background-color: #06130B !important;
+  color: #ECFDF5 !important;
+}
+html.dark .ysb-admin-root .bg-white {
+  background-color: #0D1F15 !important;
+  color: #ECFDF5 !important;
+}
+html.dark .ysb-admin-root .bg-\[\#F1F5F2\],
+html.dark .ysb-admin-root .bg-slate-50,
+html.dark .ysb-admin-root .bg-slate-100 {
+  background-color: #132C1E !important;
+  color: #D1FAE5 !important;
+}
+html.dark .ysb-admin-root .border-slate-200,
+html.dark .ysb-admin-root .border-slate-200\/80,
+html.dark .ysb-admin-root .border-slate-200\/75,
+html.dark .ysb-admin-root .border-slate-100 {
+  border-color: #1D442C !important;
+}
+html.dark .ysb-admin-root .text-slate-900,
+html.dark .ysb-admin-root .text-slate-800 {
+  color: #F0FDF4 !important;
+}
+html.dark .ysb-admin-root .text-slate-700,
+html.dark .ysb-admin-root .text-slate-600,
+html.dark .ysb-admin-root .text-slate-500 {
+  color: #A7C4B3 !important;
+}
+html.dark .ysb-admin-root input,
+html.dark .ysb-admin-root textarea,
+html.dark .ysb-admin-root select {
+  background-color: #091910;
+  color: #F0FDF4;
+  border-color: #235336;
+}
+
+/* Custom subtle scrollbars */
 ::-webkit-scrollbar {
   width: 7px;
   height: 7px;
 }
 ::-webkit-scrollbar-track {
   background: #f1f5f2;
+}
+html.dark ::-webkit-scrollbar-track {
+  background: #07170E;
 }
 ::-webkit-scrollbar-thumb {
   background: #bdd3c3;

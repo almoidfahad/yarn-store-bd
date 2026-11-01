@@ -24,8 +24,12 @@ import {
 import { WorldExportMap } from './WorldExportMap';
 import { CertificationEmblems, CountryFlagAvatar } from './VisualBadges';
 import { useGlobalPrefs } from './SiteChrome';
+import {
+  ContentProtectionShield,
+  ProtectedProductImage,
+} from './ContentProtectionShield';
 import { LANGUAGE_LABELS } from '@/lib/staticContent';
-import type { ProductItem } from '@/lib/db';
+import type { ProductItem, SecuritySettings } from '@/lib/db';
 
 const HERO_SLIDES = [
   {
@@ -97,7 +101,13 @@ const TESTIMONIAL_PAGES = [
   ],
 ];
 
-export function HomeClient({ products }: { products: ProductItem[] }) {
+export function HomeClient({
+  products,
+  initialSecuritySettings,
+}: {
+  products: ProductItem[];
+  initialSecuritySettings?: SecuritySettings;
+}) {
   const { lang } = useGlobalPrefs();
   const [heroIdx, setHeroIdx] = useState(0);
   const [testimonialPage, setTestimonialPage] = useState(0);
@@ -258,6 +268,7 @@ export function HomeClient({ products }: { products: ProductItem[] }) {
       {/* =====================================================================
           3. OUR PRODUCTS — Premium Yarn & Thread Collection (4 Cards + Botanical Accents)
       ===================================================================== */}
+      <ContentProtectionShield scope="products" initialSettings={initialSecuritySettings}>
       <section className="relative py-10 sm:py-14 overflow-hidden">
         {/* Subtle Botanical Leaf Line-Art Watermarks on Left & Right like Screenshot #1 */}
         <svg
@@ -303,13 +314,14 @@ export function HomeClient({ products }: { products: ProductItem[] }) {
                 >
                   <div className="relative h-48 overflow-hidden bg-slate-100 p-2.5 pb-0">
                     <div className="w-full h-full rounded-xl overflow-hidden relative">
-                      <img
+                      <ProtectedProductImage
                         src={item.image}
                         alt={item.name}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        protectedEnabled={initialSecuritySettings?.productScreenshotProtection !== false}
                       />
                       <span
-                        className={`absolute top-2 left-2 text-[10px] font-bold px-2.5 py-0.5 rounded-full backdrop-blur-sm ${
+                        className={`absolute top-2 left-2 z-20 text-[10px] font-bold px-2.5 py-0.5 rounded-full backdrop-blur-sm ${
                           isOwn
                             ? 'bg-[#08752B]/90 text-white'
                             : 'bg-amber-500/95 text-white'
@@ -340,6 +352,7 @@ export function HomeClient({ products }: { products: ProductItem[] }) {
           </div>
         </div>
       </section>
+      </ContentProtectionShield>
 
       {/* =====================================================================
           4. ABOUT YARN STORE BD — 3-Column Layout with "Since 2010" Badge

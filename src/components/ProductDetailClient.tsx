@@ -13,7 +13,11 @@ import {
   ShieldCheck,
   X,
 } from 'lucide-react';
-import type { ProductItem } from '@/lib/db';
+import type { ProductItem, SecuritySettings } from '@/lib/db';
+import {
+  ContentProtectionShield,
+  ProtectedProductImage,
+} from './ContentProtectionShield';
 
 const EMBROIDERY_SHADES = [
   { code: 'MHR-101', name: 'Ruby Crimson', hex: '#B91C1C' },
@@ -29,9 +33,11 @@ const EMBROIDERY_SHADES = [
 export function ProductDetailClient({
   product,
   related,
+  initialSecuritySettings,
 }: {
   product: ProductItem;
   related: ProductItem[];
+  initialSecuritySettings?: SecuritySettings;
 }) {
   const [activeImage, setActiveImage] = useState(product.image);
   const [selectedShade, setSelectedShade] = useState(EMBROIDERY_SHADES[0]);
@@ -54,6 +60,7 @@ export function ProductDetailClient({
   ];
 
   return (
+    <ContentProtectionShield scope="products" initialSettings={initialSecuritySettings}>
     <div className="bg-white">
       {/* Breadcrumb Bar */}
       <div className="bg-[#F5F8F5] border-b border-emerald-100 py-3 text-xs">
@@ -72,7 +79,12 @@ export function ProductDetailClient({
           {/* Left Image Gallery */}
           <div className="lg:col-span-6 space-y-3">
             <div className="rounded-2xl overflow-hidden border border-slate-200 bg-slate-100 h-[340px] sm:h-[420px]">
-              <img src={activeImage} alt={product.name} className="w-full h-full object-cover" />
+              <ProtectedProductImage
+                src={activeImage}
+                alt={product.name}
+                className="w-full h-full object-cover"
+                protectedEnabled={initialSecuritySettings?.productScreenshotProtection !== false}
+              />
             </div>
             <div className="flex gap-3">
               {product.gallery.map((imgUrl, i) => (
@@ -84,7 +96,12 @@ export function ProductDetailClient({
                     activeImage === imgUrl ? 'border-[#08752B]' : 'border-slate-200 opacity-75 hover:opacity-100'
                   }`}
                 >
-                  <img src={imgUrl} alt="" className="w-full h-full object-cover" />
+                  <ProtectedProductImage
+                    src={imgUrl}
+                    alt={product.name}
+                    className="w-full h-full object-cover"
+                    protectedEnabled={initialSecuritySettings?.productScreenshotProtection !== false}
+                  />
                 </button>
               ))}
             </div>
@@ -320,5 +337,6 @@ export function ProductDetailClient({
         </div>
       )}
     </div>
+    </ContentProtectionShield>
   );
 }

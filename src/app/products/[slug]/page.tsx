@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { PublicShell } from '@/components/SiteChrome';
 import { ProductDetailClient } from '@/components/ProductDetailClient';
-import { readDB } from '@/lib/db';
+import { readDB, readDBCloud } from '@/lib/db';
 
 export const dynamic = 'force-dynamic';
 
@@ -19,8 +19,8 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   };
 }
 
-export default function ProductDetailPage({ params }: { params: { slug: string } }) {
-  const db = readDB();
+export default async function ProductDetailPage({ params }: { params: { slug: string } }) {
+  const db = await readDBCloud();
   const product = db.products.find((p) => p.slug === params.slug && !p.archivedAt);
   if (!product) {
     notFound();
@@ -50,7 +50,11 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
       />
-      <ProductDetailClient product={product} related={related} />
+      <ProductDetailClient
+        product={product}
+        related={related}
+        initialSecuritySettings={db.securitySettings}
+      />
     </PublicShell>
   );
 }

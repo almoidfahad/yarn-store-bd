@@ -32,10 +32,15 @@ import {
   Printer,
   Archive,
   Sparkles,
+  LogOut,
+  ShieldOff,
 } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
 import { QuotationDocumentModal } from './SiteChrome';
 import { CloudAndCompanySettingsPanel } from './CloudAndCompanySettingsPanel';
+import { AdminLoginGate } from './AdminLoginGate';
+import { ContentProtectionShield } from './ContentProtectionShield';
+import type { AdminSessionUser } from './AdminLoginGate';
 import type {
   PlatformDB,
   LeadStage,
@@ -117,6 +122,7 @@ function Sparkline({ color, points }: { color: string; points: string }) {
 export function AdminDashboardClient({
   initialDb,
   initialKpis,
+  initialAdminUser,
 }: {
   initialDb: PlatformDB;
   initialKpis: {
@@ -126,7 +132,9 @@ export function AdminDashboardClient({
     confirmedOrders: number;
     customerSatisfactionPct: number;
   };
+  initialAdminUser?: AdminSessionUser | null;
 }) {
+  const [adminUser, setAdminUser] = useState<AdminSessionUser | null>(initialAdminUser ?? null);
   const [db, setDb] = useState<PlatformDB>(initialDb);
   const [kpis, setKpis] = useState(initialKpis);
   const [activeTab, setActiveTab] = useState<AdminTab>('dashboard');
@@ -281,7 +289,25 @@ export function AdminDashboardClient({
       })
       .join(' ');
 
+  async function handleLogout() {
+    await fetch('/api/admin-auth', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'LOGOUT' }),
+    }).catch(() => {});
+    setAdminUser(null);
+  }
+
+  if (!adminUser) {
+    return (
+      <ContentProtectionShield scope="dashboard" liveSettings={db.securitySettings}>
+        <AdminLoginGate onAuthenticated={(user) => setAdminUser(user)} />
+      </ContentProtectionShield>
+    );
+  }
+
   return (
+    <ContentProtectionShield scope="dashboard" liveSettings={db.securitySettings}>
     <div className="min-h-screen flex bg-[#F3F6F4] text-[#17231C]">
       {/* Toast Notification */}
       {toast && (
@@ -421,6 +447,28 @@ export function AdminDashboardClient({
               >
                 Buyer Portal <ExternalLink className="w-3 h-3" />
               </Link>
+              <button
+                type="button"
+                onClick={() => setActiveTab('settings')}
+                title="Configure Anti-Screenshot & Recording Shield in Settings"
+                className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-full font-bold transition ${
+                  db.securitySettings?.dashboardScreenshotProtection
+                    ? 'bg-emerald-950 text-emerald-200 hover:bg-emerald-900'
+                    : 'bg-amber-100 text-amber-800 hover:bg-amber-200'
+                }`}
+              >
+                {db.securitySettings?.dashboardScreenshotProtection ? (
+                  <>
+                    <Shield className="w-3 h-3 text-amber-400" />
+                    <span>Shield ON</span>
+                  </>
+                ) : (
+                  <>
+                    <ShieldOff className="w-3 h-3" />
+                    <span>Shield OFF</span>
+                  </>
+                )}
+              </button>
             </div>
 
             <button
@@ -464,7 +512,18 @@ export function AdminDashboardClient({
                   <option value="Quality Manager">Quality Manager</option>
                   <option value="Finance Manager">Finance Manager</option>
                 </select>
+                <div className="text-[10px] font-bold text-[#08752B] truncate max-w-[120px]">
+                  {adminUser.providerLabel}
+                </div>
               </div>
+              <button
+                type="button"
+                onClick={handleLogout}
+                title="Sign Out & Lock Dashboard"
+                className="p-2 rounded-full hover:bg-red-50 text-slate-500 hover:text-red-600 transition"
+              >
+                <LogOut className="w-4 h-4" />
+              </button>
             </div>
           </div>
         </header>
@@ -1983,11 +2042,21 @@ export function AdminDashboardClient({
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 text-xs">
               <CloudAndCompanySettingsPanel
                 companyProfile={db.companyProfile}
+                securitySettings={db.securitySettings}
                 onSaveCompanyProfile={(updated) =>
                   mutate(
                     'UPDATE_COMPANY_PROFILE',
                     updated,
                     'Company profile updated (Demo -> Custom Details Saved)'
+                  )
+                }
+                onUpdateSecuritySettings={(updatedSec) =>
+                  mutate(
+                    'UPDATE_SECURITY_SETTINGS',
+                    { ...updatedSec },
+                    `Anti-Screenshot Shield Updated (Dashboard: ${
+                      updatedSec.dashboardScreenshotProtection ? 'ON' : 'OFF'
+                    }, Products: ${updatedSec.productScreenshotProtection ? 'ON' : 'OFF'})`
                   )
                 }
               />
@@ -2070,5 +2139,6 @@ export function AdminDashboardClient({
 
       <QuotationDocumentModal quote={selectedQuotePdf} onClose={() => setSelectedQuotePdf(null)} />
     </div>
+    </ContentProtectionShield>
   );
 }

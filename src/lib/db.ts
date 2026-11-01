@@ -5,6 +5,12 @@ import {
   loadSnapshotFromSupabase,
   saveSnapshotToSupabase,
 } from '@/lib/supabase';
+import {
+  DEFAULT_SECURITY_SETTINGS,
+  type SecuritySettings,
+} from '@/lib/securityTypes';
+
+export { DEFAULT_SECURITY_SETTINGS, type SecuritySettings };
 
 export type SupplyType =
   | 'Manufactured by YARN STORE BD'
@@ -248,6 +254,7 @@ export interface ChecklistItem {
 }
 
 export interface PlatformDB {
+  securitySettings: SecuritySettings;
   companyProfile: {
     name: string;
     legalSubtitle: string;
@@ -1408,7 +1415,20 @@ const INITIAL_DB: PlatformDB = {
       kpis: 'Target > 14% RFQ-to-Confirmed-Order Conversion',
     },
   ],
+  securitySettings: { ...DEFAULT_SECURITY_SETTINGS },
 };
+
+function normalizeDB(parsed: Partial<PlatformDB> | null | undefined): PlatformDB {
+  if (!parsed) return INITIAL_DB;
+  return {
+    ...INITIAL_DB,
+    ...parsed,
+    securitySettings: {
+      ...DEFAULT_SECURITY_SETTINGS,
+      ...(parsed.securitySettings || {}),
+    },
+  };
+}
 
 export function readDB(): PlatformDB {
   try {
@@ -1418,37 +1438,40 @@ export function readDB(): PlatformDB {
     if (!fs.existsSync(DB_PATH)) {
       if (process.env.VERCEL === '1' && fs.existsSync(BUNDLED_DB_PATH)) {
         const bundledRaw = fs.readFileSync(BUNDLED_DB_PATH, 'utf-8');
-        fs.writeFileSync(DB_PATH, bundledRaw, 'utf-8');
-        return JSON.parse(bundledRaw) as PlatformDB;
+        const normalized = normalizeDB(JSON.parse(bundledRaw));
+        fs.writeFileSync(DB_PATH, JSON.stringify(normalized, null, 2), 'utf-8');
+        return normalized;
       }
       fs.writeFileSync(DB_PATH, JSON.stringify(INITIAL_DB, null, 2), 'utf-8');
       return INITIAL_DB;
     }
     const raw = fs.readFileSync(DB_PATH, 'utf-8');
-    return JSON.parse(raw) as PlatformDB;
+    return normalizeDB(JSON.parse(raw));
   } catch {
     return INITIAL_DB;
   }
 }
 
 export function writeDB(data: PlatformDB): PlatformDB {
+  const normalized = normalizeDB(data);
   try {
     if (!fs.existsSync(DATA_DIR)) {
       fs.mkdirSync(DATA_DIR, { recursive: true });
     }
-    fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2), 'utf-8');
+    fs.writeFileSync(DB_PATH, JSON.stringify(normalized, null, 2), 'utf-8');
   } catch {
     // Graceful fallback in restricted serverless environments
   }
-  return data;
+  return normalized;
 }
 
 export async function readDBCloud(): Promise<PlatformDB> {
   if (isSupabaseConfigured()) {
     const cloudSnap = await loadSnapshotFromSupabase<PlatformDB>();
     if (cloudSnap && cloudSnap.products && cloudSnap.leads) {
-      writeDB(cloudSnap);
-      return cloudSnap;
+      const normalized = normalizeDB(cloudSnap);
+      writeDB(normalized);
+      return normalized;
     }
   }
   return readDB();

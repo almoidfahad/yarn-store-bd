@@ -11,9 +11,19 @@ import {
   FlaskConical,
   FileCheck2,
 } from 'lucide-react';
-import type { ProductItem } from '@/lib/db';
+import type { ProductItem, SecuritySettings } from '@/lib/db';
+import {
+  ContentProtectionShield,
+  ProtectedProductImage,
+} from './ContentProtectionShield';
 
-export function ProductsCatalogClient({ products }: { products: ProductItem[] }) {
+export function ProductsCatalogClient({
+  products,
+  initialSecuritySettings,
+}: {
+  products: ProductItem[];
+  initialSecuritySettings?: SecuritySettings;
+}) {
   const [category, setCategory] = useState<string>('All');
   const [supplyFilter, setSupplyFilter] = useState<string>('All');
   const [query, setQuery] = useState('');
@@ -32,6 +42,7 @@ export function ProductsCatalogClient({ products }: { products: ProductItem[] })
   });
 
   return (
+    <ContentProtectionShield scope="products" initialSettings={initialSecuritySettings}>
     <div>
       {/* Hero Banner */}
       <section className="bg-gradient-to-r from-[#053517] via-[#085D28] to-[#0B6E30] text-white py-12 sm:py-16">
@@ -112,8 +123,13 @@ export function ProductsCatalogClient({ products }: { products: ProductItem[] })
               >
                 <div>
                   <div className="relative h-64 bg-slate-100">
-                    <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
-                    <div className="absolute top-3 left-3 flex flex-wrap gap-2">
+                    <ProtectedProductImage
+                      src={item.image}
+                      alt={item.name}
+                      className="w-full h-full object-cover"
+                      protectedEnabled={initialSecuritySettings?.productScreenshotProtection !== false}
+                    />
+                    <div className="absolute top-3 left-3 z-20 flex flex-wrap gap-2">
                       <span
                         className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold shadow ${
                           isOwn ? 'bg-[#08752B] text-white' : 'bg-[#F28C18] text-white'
@@ -190,5 +206,6 @@ export function ProductsCatalogClient({ products }: { products: ProductItem[] })
         </div>
       </section>
     </div>
+    </ContentProtectionShield>
   );
 }

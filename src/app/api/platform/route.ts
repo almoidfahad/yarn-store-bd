@@ -125,6 +125,20 @@ export async function POST(req: NextRequest) {
         action: `Updated Corporate Profile (${db.companyProfile.name} · ${db.companyProfile.email})`,
         timestamp: 'Just now',
       });
+    } else if (action === 'UPDATE_SECURITY_SETTINGS') {
+      db.securitySettings = {
+        ...db.securitySettings,
+        ...payload,
+      };
+      db.auditLogs.unshift({
+        id: `aud-${Date.now()}`,
+        actor: 'Super Admin',
+        role: 'Super Admin',
+        action: `Updated Anti-Screenshot & Recording Shield (Dashboard: ${
+          db.securitySettings.dashboardScreenshotProtection ? 'ON' : 'OFF'
+        }, Products: ${db.securitySettings.productScreenshotProtection ? 'ON' : 'OFF'})`,
+        timestamp: 'Just now',
+      });
     } else if (action === 'UPDATE_LEAD_STATUS') {
       const lead = db.leads.find((l) => l.id === payload.id);
       if (lead) {

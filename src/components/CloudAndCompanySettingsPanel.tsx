@@ -1,7 +1,18 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { CheckCircle2, Cloud, Database, Mail, RefreshCw, Save } from 'lucide-react';
+import {
+  CheckCircle2,
+  Cloud,
+  Database,
+  Lock,
+  Mail,
+  RefreshCw,
+  Save,
+  Shield,
+  ShieldOff,
+} from 'lucide-react';
+import { DEFAULT_SECURITY_SETTINGS, type SecuritySettings } from '@/lib/securityTypes';
 import type { PlatformDB } from '@/lib/db';
 
 interface IntegrationStatus {
@@ -12,14 +23,19 @@ interface IntegrationStatus {
 
 export function CloudAndCompanySettingsPanel({
   companyProfile,
+  securitySettings,
   onSaveCompanyProfile,
+  onUpdateSecuritySettings,
 }: {
   companyProfile: PlatformDB['companyProfile'];
+  securitySettings?: SecuritySettings;
   onSaveCompanyProfile: (updated: PlatformDB['companyProfile']) => void;
+  onUpdateSecuritySettings: (updated: SecuritySettings) => void;
 }) {
+  const sec = securitySettings || DEFAULT_SECURITY_SETTINGS;
   const [status, setStatus] = useState<IntegrationStatus | null>(null);
   const [testResult, setTestResult] = useState<string | null>(null);
-  const [testEmail, setTestEmail] = useState(companyProfile.email || 'info@yarnstorebd.com');
+  const [testEmail, setTestEmail] = useState(companyProfile.email || 'almoidfahad@gmail.com');
   const [testing, setTesting] = useState(false);
 
   const [form, setForm] = useState(companyProfile);
@@ -51,23 +67,155 @@ export function CloudAndCompanySettingsPanel({
     }
   }
 
+  function toggleFlag(key: keyof SecuritySettings) {
+    onUpdateSecuritySettings({
+      ...sec,
+      [key]: !sec[key],
+    });
+  }
+
+  const allOn =
+    sec.dashboardScreenshotProtection && sec.productScreenshotProtection;
+
   return (
     <div className="lg:col-span-2 space-y-5">
-      {/* 1. Vercel + Supabase + Resend Integration Status Card */}
-      <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-soft space-y-4">
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <div>
-            <h3 className="text-sm sm:text-base font-extrabold text-slate-900">
-              Cloud Deployment Stack — Vercel + Supabase + Resend
-            </h3>
-            <p className="text-xs text-slate-500">
-              Runs out-of-the-box with Demo Data right now, and automatically switches to Cloud PostgreSQL &amp; Live Transactional Email as soon as environment variables are added in Vercel.
-            </p>
+      {/* =====================================================================
+          1. ANTI-SCREENSHOT & ANTI-SCREEN-RECORDING ON/OFF CONTROL PANEL
+      ===================================================================== */}
+      <div className="bg-white rounded-2xl p-5 border-2 border-emerald-200 shadow-soft space-y-4">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="flex items-start gap-3">
+            <div
+              className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${
+                allOn ? 'bg-[#08752B] text-white' : 'bg-slate-200 text-slate-600'
+              }`}
+            >
+              {allOn ? <Shield className="w-5 h-5" /> : <ShieldOff className="w-5 h-5" />}
+            </div>
+            <div>
+              <h3 className="text-sm sm:text-base font-extrabold text-slate-900">
+                Anti-Screenshot &amp; Anti-Screen-Recording Security Shield (ON / OFF)
+              </h3>
+              <p className="text-xs text-slate-500">
+                Control screenshot blocking, screen-recorder blackout curtains, and image save protection across your Admin Dashboard and Product Pages in real time.
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() =>
+                onUpdateSecuritySettings({
+                  dashboardScreenshotProtection: true,
+                  productScreenshotProtection: true,
+                  antiScreenRecordingBlur: true,
+                  blockRightClickAndDrag: true,
+                  watermarkOverlay: true,
+                })
+              }
+              className="px-3.5 py-2 rounded-xl bg-[#08752B] hover:bg-[#065C22] text-white text-xs font-extrabold"
+            >
+              Enable All Protection
+            </button>
+            <button
+              type="button"
+              onClick={() =>
+                onUpdateSecuritySettings({
+                  ...sec,
+                  dashboardScreenshotProtection: false,
+                  productScreenshotProtection: false,
+                })
+              }
+              className="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-extrabold"
+            >
+              Turn All OFF
+            </button>
           </div>
         </div>
 
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+          {[
+            {
+              key: 'dashboardScreenshotProtection' as const,
+              title: 'Admin Dashboard Anti-Screenshot & Recording',
+              desc: 'Blocks PrintScreen, Snipping Tool, macOS/Windows screenshot shortcuts & screen recorders inside /admin.',
+            },
+            {
+              key: 'productScreenshotProtection' as const,
+              title: 'Product Pages Anti-Screenshot & Video Recording',
+              desc: 'Protects /products & all product photos/specs from screenshots, video recording, right-click save & drag.',
+            },
+            {
+              key: 'antiScreenRecordingBlur' as const,
+              title: 'Instant Blackout Curtain on Snipping Tool / Recorder',
+              desc: 'Immediately cloaks screen when Snipping Tool, OBS, QuickTime, or mobile capture steals window focus.',
+            },
+            {
+              key: 'blockRightClickAndDrag' as const,
+              title: 'Block Right-Click, Save Image & DevTools Inspect',
+              desc: 'Prevents "Save Image As", image dragging, F12 inspect, and Ctrl+S page downloading.',
+            },
+            {
+              key: 'watermarkOverlay' as const,
+              title: 'Dynamic Forensic Anti-Camera Watermark',
+              desc: 'Places subtle protected watermark across protected views to deter external phone camera photos.',
+            },
+          ].map((item) => {
+            const enabled = sec[item.key];
+            return (
+              <div
+                key={item.key}
+                className={`p-4 rounded-xl border flex items-center justify-between gap-4 transition ${
+                  enabled
+                    ? 'bg-[#F3FAF5] border-emerald-300'
+                    : 'bg-slate-50 border-slate-200'
+                }`}
+              >
+                <div className="space-y-0.5">
+                  <div className="font-extrabold text-slate-900 flex items-center gap-1.5">
+                    <Lock className={`w-3.5 h-3.5 ${enabled ? 'text-[#08752B]' : 'text-slate-400'}`} />
+                    <span>{item.title}</span>
+                  </div>
+                  <p className="text-[11px] text-slate-600 leading-relaxed">{item.desc}</p>
+                </div>
+
+                <button
+                  type="button"
+                  role="switch"
+                  aria-checked={enabled}
+                  onClick={() => toggleFlag(item.key)}
+                  className={`relative inline-flex h-7 w-13 shrink-0 items-center rounded-full px-1 transition-colors font-extrabold text-[10px] ${
+                    enabled ? 'bg-[#08752B] text-white' : 'bg-slate-300 text-slate-700'
+                  }`}
+                  style={{ width: '56px' }}
+                >
+                  <span
+                    className={`inline-block h-5 w-5 transform rounded-full bg-white shadow transition-transform ${
+                      enabled ? 'translate-x-6' : 'translate-x-0'
+                    }`}
+                  />
+                </button>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* =====================================================================
+          2. VERCEL + SUPABASE + RESEND CLOUD STACK STATUS
+      ===================================================================== */}
+      <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-soft space-y-4">
+        <div>
+          <h3 className="text-sm sm:text-base font-extrabold text-slate-900">
+            Cloud Deployment Stack — Vercel + Supabase + Resend
+          </h3>
+          <p className="text-xs text-slate-500">
+            Live cloud database &amp; email infrastructure status, plus optional external OAuth callback URL (`https://xiyfzjjgkmtoxchfexyi.supabase.co/auth/v1/callback`) for LinkedIn, Google, Facebook &amp; X.
+          </p>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 text-xs">
-          {/* Vercel */}
           <div className="p-4 rounded-xl bg-[#F5F9F6] border border-emerald-200 space-y-1.5">
             <div className="flex items-center justify-between">
               <span className="inline-flex items-center gap-1.5 font-extrabold text-[#10371E]">
@@ -78,11 +226,10 @@ export function CloudAndCompanySettingsPanel({
               </span>
             </div>
             <p className="text-slate-600">
-              Env: <strong>{status?.vercel.environment || 'local-demo'}</strong> · Serverless `/tmp` + Cloud Safe
+              Env: <strong>{status?.vercel.environment || 'local-demo'}</strong>
             </p>
           </div>
 
-          {/* Supabase */}
           <div className="p-4 rounded-xl bg-[#F5F9F6] border border-emerald-200 space-y-2">
             <div className="flex items-center justify-between">
               <span className="inline-flex items-center gap-1.5 font-extrabold text-[#10371E]">
@@ -111,7 +258,6 @@ export function CloudAndCompanySettingsPanel({
             </button>
           </div>
 
-          {/* Resend */}
           <div className="p-4 rounded-xl bg-[#F5F9F6] border border-emerald-200 space-y-2">
             <div className="flex items-center justify-between">
               <span className="inline-flex items-center gap-1.5 font-extrabold text-[#10371E]">
@@ -155,7 +301,9 @@ export function CloudAndCompanySettingsPanel({
         )}
       </div>
 
-      {/* 2. Demo -> Real Company Information Quick Editor */}
+      {/* =====================================================================
+          3. COMPANY INFORMATION QUICK EDITOR
+      ===================================================================== */}
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -166,10 +314,10 @@ export function CloudAndCompanySettingsPanel({
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div>
             <h3 className="text-sm sm:text-base font-extrabold text-slate-900">
-              Company Information Editor (Currently Using Demo Data — Edit Anytime)
+              Company Information Editor (Demo Data — Edit Anytime)
             </h3>
             <p className="text-slate-500">
-              Change your company name, official email, WhatsApp hotline, Dhaka office address, or ERC license here whenever you are ready to replace demo data.
+              Change your company name, official email, WhatsApp hotline, Dhaka office address, or ERC license here whenever ready.
             </p>
           </div>
           <button

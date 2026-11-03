@@ -347,7 +347,7 @@
       "notes": "RFQ YSB-RFQ-2026-006 · CIF Port of Savannah / Main Port. Hi, I am Fahad. I'm testing my company info",
       "phone": "+880 17273343558",
       "source": "Direct Website",
-      "status": "New Lead",
+      "status": "Qualified",
       "aiScore": 73,
       "company": "almoidfahadllc@gmail.com",
       "country": "United States",
@@ -357,6 +357,12 @@
       "buyerName": "Al Moid Fahad",
       "dateLabel": "Today",
       "activities": [
+        {
+          "id": "act-1793688811741",
+          "date": "Today",
+          "actor": "Tanvir Rahman (Sales Manager)",
+          "action": "Pipeline status updated to \"Qualified\""
+        },
         {
           "id": "act-1793492818435-1",
           "date": "Just now",
@@ -374,7 +380,7 @@
       "assignedTo": "Tanvir Rahman (Sales Manager)",
       "estimatedQty": "5,000 KG (Ne 30/1 Combed)",
       "nextFollowUp": "2026-11-02",
-      "dashboardBadge": "New"
+      "dashboardBadge": "Contacted"
     },
     {
       "id": "lead-001",
@@ -698,6 +704,28 @@
     }
   ],
   "quotes": [
+    {
+      "id": "qt-1793496515955",
+      "unit": "KG",
+      "rfqRef": "YSB-RFQ-2026-006",
+      "country": "United States",
+      "product": "Cotton Yarn — Ne 30/1 Combed",
+      "currency": "USD",
+      "quantity": 5000,
+      "createdAt": "2026-11-01",
+      "incoterms": "CIF Port of Savannah / Main Port",
+      "unitPrice": 3.25,
+      "approvedBy": "Md. Habibur Rahman (Super Admin / Director)",
+      "buyerEmail": "almoidfahad@gmail.com",
+      "totalPrice": 16250,
+      "quoteNumber": "YSB-QT-2026-111",
+      "buyerCompany": "almoidfahadllc@gmail.com",
+      "deliveryTime": "14 Business Days",
+      "paymentTerms": "100% Irrevocable L/C at Sight",
+      "validityDate": "2026-11-30",
+      "specification": "Ring Spun Combed / Filament · CIF Port of Savannah / Main Port",
+      "approvalStatus": "Sent to Buyer"
+    },
     {
       "id": "qt-1",
       "unit": "KG",
@@ -1058,6 +1086,14 @@
   ],
   "emailLogs": [
     {
+      "id": "em-1793496570173",
+      "sentAt": "Just now (Resend)",
+      "status": "Delivered",
+      "subject": "Official Quotation YSB-QT-2026-111 (Cotton Yarn — Ne 30/1 Combed) — YARN STORE BD",
+      "trigger": "Approved PDF Quotation Sent",
+      "recipient": "almoidfahad@gmail.com"
+    },
+    {
       "id": "em-1793492820372-buyer",
       "sentAt": "Just now (Resend)",
       "status": "Delivered",
@@ -1124,10 +1160,17 @@
   ],
   "notifications": [
     {
+      "id": "notif-1793496515955",
+      "color": "orange",
+      "title": "Draft Quote YSB-QT-2026-111 created for almoidfahadllc@gmail.com — awaiting Manager approval",
+      "unread": false,
+      "timeAgo": "Just now"
+    },
+    {
       "id": "notif-1793492820372",
       "color": "green",
       "title": "New RFQ YSB-RFQ-2026-006 received from almoidfahadllc@gmail.com (United States)",
-      "unread": true,
+      "unread": false,
       "timeAgo": "Just now"
     },
     {
@@ -1241,6 +1284,76 @@
     }
   ],
   "auditLogs": [
+    {
+      "id": "aud-1793688791823",
+      "role": "Super Admin",
+      "actor": "Al Moid Fahad (almoidfahad@gmail.com)",
+      "action": "Signed in to Admin Dashboard via Admin Credentials",
+      "timestamp": "Just now"
+    },
+    {
+      "id": "aud-1793498972364",
+      "role": "Super Admin",
+      "actor": "Al Moid Fahad (almoidfahad@gmail.com)",
+      "action": "Signed in to Admin Dashboard via Google Workspace",
+      "timestamp": "Just now"
+    },
+    {
+      "id": "aud-1793496830556",
+      "role": "Super Admin",
+      "actor": "Al Moid Fahad (almoidfahad@gmail.com)",
+      "action": "Signed in to Admin Dashboard via Admin Credentials",
+      "timestamp": "Just now"
+    },
+    {
+      "id": "aud-1793496684326",
+      "role": "Super Admin",
+      "actor": "Al Moid Fahad (almoidfahad@gmail.com)",
+      "action": "Signed in to Admin Dashboard via LinkedIn B2B Verified",
+      "timestamp": "Just now"
+    },
+    {
+      "id": "aud-1793496570173",
+      "role": "Super Admin",
+      "actor": "Md. Habibur Rahman",
+      "action": "Approved & dispatched PDF Quotation YSB-QT-2026-111 to almoidfahadllc@gmail.com",
+      "timestamp": "Just now"
+    },
+    {
+      "id": "aud-1793496515955",
+      "role": "Sales Manager",
+      "actor": "Sales Desk",
+      "action": "Created Quotation YSB-QT-2026-111 (USD 16,250)",
+      "timestamp": "Just now"
+    },
+    {
+      "id": "aud-1793496407192",
+      "role": "Super Admin",
+      "actor": "Al Moid Fahad (almoidfahad@gmail.com)",
+      "action": "Signed in to Admin Dashboard via Admin Credentials",
+      "timestamp": "Just now"
+    },
+    {
+      "id": "aud-1793496079039",
+      "role": "Super Admin",
+      "actor": "Al Moid Fahad (almoidfahad@gmail.com)",
+      "action": "Signed in to Admin Dashboard via Admin Credentials",
+      "timestamp": "Just now"
+    },
+    {
+      "id": "aud-1793495892912",
+      "role": "Super Admin",
+      "actor": "Al Moid Fahad (almoidfahad@gmail.com)",
+      "action": "Signed in to Admin Dashboard via Admin Credentials",
+      "timestamp": "Just now"
+    },
+    {
+      "id": "aud-1793495831613",
+      "role": "Super Admin",
+      "actor": "Al Moid Fahad (almoidfahad@gmail.com)",
+      "action": "Signed in to Admin Dashboard via LinkedIn B2B Verified",
+      "timestamp": "Just now"
+    },
     {
       "id": "aud-1",
       "role": "Super Admin",
@@ -1425,6 +1538,7 @@
       "status": "Scheduled"
     }
   ],
+  "adminAccounts": [],
   "securitySettings": {
     "dashboardScreenshotProtection": true,
     "productScreenshotProtection": true,

@@ -25,12 +25,18 @@ export function ContentProtectionShield({
   const contentRef = useRef<HTMLDivElement | null>(null);
   const reasonTextRef = useRef<HTMLParagraphElement | null>(null);
   const lockUntilRef = useRef<number>(0);
+  const autoClearTimerRef = useRef<number | null>(null);
+  const entryGraceUntilRef = useRef<number>(Date.now() + 2500);
 
   const settings = liveSettings || fetchedSettings;
   const isProtected =
     scope === 'dashboard'
       ? settings.dashboardScreenshotProtection
       : settings.productScreenshotProtection;
+
+  useEffect(() => {
+    entryGraceUntilRef.current = Date.now() + 2500;
+  }, [scope]);
 
   useEffect(() => {
     if (liveSettings) return;
@@ -66,11 +72,9 @@ export function ContentProtectionShield({
       return;
     }
 
-    // Synchronous <0.1ms DOM blackout (executes before OS screenshot / recorder grabs frame)
-    const cloakNow = (reason?: string, holdMs = 0) => {
-      if (holdMs > 0) {
-        lockUntilRef.current = Math.max(lockUntilRef.current, Date.now() + holdMs);
-      }
+    // Synchronous <0.1ms blackout for explicit screenshot / recording triggers ONLY
+    const cloakExplicitCapture = (reason: string, holdMs = 2200) => {
+      lockUntilRef.current = Math.max(lockUntilRef.current, Date.now() + holdMs);
       if (content) {
         content.style.opacity = '0';
         content.style.visibility = 'hidden';
@@ -81,7 +85,7 @@ export function ContentProtectionShield({
         curtain.style.opacity = '1';
         curtain.style.pointerEvents = 'auto';
       }
-      if (reason && reasonTextRef.current) {
+      if (reasonTextRef.current) {
         reasonTextRef.current.textContent = reason;
       }
       try {
@@ -93,31 +97,39 @@ export function ContentProtectionShield({
       } catch {
         // Ignore clipboard errors
       }
+      if (autoClearTimerRef.current) {
+        window.clearTimeout(autoClearTimerRef.current);
+      }
+      autoClearTimerRef.current = window.setTimeout(() => {
+        if (!document.hidden && Date.now() >= lockUntilRef.current) {
+          showContent();
+        }
+      }, holdMs + 60);
     };
 
-    const tryRestore = (forceUnlock = false) => {
-      if (forceUnlock) {
-        lockUntilRef.current = 0;
+    // Silent filter-only blur when tab/window is genuinely hidden in background (NEVER shows the blocking popup modal on entry/focus!)
+    const applySilentBackgroundBlur = () => {
+      if (!settings.antiScreenRecordingBlur) return;
+      if (Date.now() < entryGraceUntilRef.current) return;
+      if (content) {
+        content.style.filter = 'blur(24px)';
       }
+    };
+
+    const clearSilentBackgroundBlur = () => {
       if (Date.now() < lockUntilRef.current) return;
-      if (document.hidden) return;
-      if (settings.antiScreenRecordingBlur && !document.hasFocus()) return;
       showContent();
     };
 
-    // Initial focus check on mount
-    if (settings.antiScreenRecordingBlur && (!document.hasFocus() || document.hidden)) {
-      cloakNow(
-        'Screen capture & background recording shield active. Click inside this window to view.'
-      );
-    }
+    // Ensure clean visible state immediately upon entering page
+    showContent();
 
     // 1. Block Browser Screen Recording & Canvas Capture APIs
     let origGetDisplayMedia: typeof navigator.mediaDevices.getDisplayMedia | undefined;
     if (typeof navigator !== 'undefined' && navigator.mediaDevices?.getDisplayMedia) {
       origGetDisplayMedia = navigator.mediaDevices.getDisplayMedia.bind(navigator.mediaDevices);
       navigator.mediaDevices.getDisplayMedia = async () => {
-        cloakNow('Screen & video recording API blocked by YARN STORE BD Security.', 4000);
+        cloakExplicitCapture('Screen & video recording API blocked by YARN STORE BD Security.', 2500);
         throw new DOMException('Screen recording blocked', 'NotAllowedError');
       };
     }
@@ -125,13 +137,14 @@ export function ContentProtectionShield({
     const origToDataURL = HTMLCanvasElement.prototype.toDataURL;
     HTMLCanvasElement.prototype.toDataURL = function (...args) {
       if (this.dataset?.ysbProtected === '1') {
-        cloakNow('Unauthorized image/extension capture blocked.', 3000);
+        cloakExplicitCapture('Unauthorized image/extension capture blocked.', 2200);
         return 'data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=';
       }
       return origToDataURL.apply(this, args);
     };
 
-    // 2. Pre-emptive 0ms Keydown / Keyup Blocker (PrintScreen, Win+Shift+S, Cmd+Shift+3/4/5, Ctrl+Shift+S, F12, Print)
+    // 2. Explicit Capture Shortcut Blocker (PrintScreen, Win+Shift+S, Cmd+Shift+3/4/5, Ctrl+Shift+S, Ctrl+P)
+    // Does NOT trigger on normal Win/Cmd key presses, copy/paste (Ctrl+C/V, Cmd+C/V, Win+V), or entering the page!
     const onKeyDown = (e: KeyboardEvent) => {
       const k = (e.key || '').toLowerCase();
 
@@ -139,46 +152,38 @@ export function ContentProtectionShield({
       if (e.key === 'PrintScreen' || e.keyCode === 44) {
         e.preventDefault();
         e.stopPropagation();
-        cloakNow('PrintScreen screenshot blocked! Clipboard wiped.', 4000);
+        cloakExplicitCapture('PrintScreen screenshot blocked! Clipboard wiped.', 2500);
         return false;
       }
 
-      // Pre-emptive cloak the instant Windows (Meta/OS) or Mac Command key is touched
-      // (Stops Win+Shift+S, Win+PrtSc, Win+Alt+R recorder, and Mac Cmd+Shift+3/4/5 BEFORE second key hits!)
-      if (
-        e.key === 'Meta' ||
-        e.key === 'OS' ||
-        e.metaKey ||
-        [91, 92, 93, 224].includes(e.keyCode)
-      ) {
-        if (e.shiftKey || ['3', '4', '5', 's', 'r', 'g', 'p'].includes(k)) {
-          e.preventDefault();
-          e.stopPropagation();
-          cloakNow('OS Screenshot / Screen Recording shortcut blocked!', 4000);
-          return false;
-        }
-        // Pre-cloak immediately while Meta/Win/Cmd is held down
-        cloakNow('Protected Mode — OS capture modifier detected. Release key or click to resume.', 650);
-      }
-
-      // Ctrl + Shift combos (Ctrl+Shift+S Edge/Firefox capture, ShareX, Lightshot, DevTools)
-      if (e.ctrlKey && e.shiftKey) {
+      // Windows Snipping Tool / Game Bar Recorder (Win+Shift+S, Win+Alt+R) or Mac Screenshot (Cmd+Shift+3/4/5)
+      if (e.metaKey && e.shiftKey && ['s', '3', '4', '5'].includes(k)) {
         e.preventDefault();
         e.stopPropagation();
-        cloakNow('Screenshot & inspection shortcut (Ctrl+Shift) blocked!', 3500);
+        cloakExplicitCapture('OS Screenshot / Screen Recording shortcut blocked!', 2500);
         return false;
       }
 
-      // Alt + PrintScreen or Alt + Shift capture tools
-      if (e.altKey && (e.shiftKey || k === 'printscreen' || k === 's')) {
-        cloakNow('Screen capture shortcut blocked!', 3000);
-      }
-
-      // F12, Ctrl+S, Ctrl+P, Ctrl+U
-      if (e.key === 'F12' || (e.ctrlKey && ['p', 's', 'u'].includes(k))) {
+      if (e.metaKey && e.altKey && k === 'r') {
         e.preventDefault();
         e.stopPropagation();
-        cloakNow('Page printing, saving & inspection are disabled on protected views.', 3500);
+        cloakExplicitCapture('Screen Recording shortcut blocked!', 2500);
+        return false;
+      }
+
+      // Browser Screenshot Shortcut (Ctrl+Shift+S)
+      if (e.ctrlKey && e.shiftKey && k === 's') {
+        e.preventDefault();
+        e.stopPropagation();
+        cloakExplicitCapture('Browser screenshot shortcut (Ctrl+Shift+S) blocked!', 2500);
+        return false;
+      }
+
+      // Print / Save Page (Ctrl+P, Cmd+P, Ctrl+S, Cmd+S)
+      if ((e.ctrlKey || e.metaKey) && !e.shiftKey && ['p', 's'].includes(k)) {
+        e.preventDefault();
+        e.stopPropagation();
+        cloakExplicitCapture('Page printing & saving are disabled on protected views.', 2000);
         return false;
       }
     };
@@ -186,61 +191,36 @@ export function ContentProtectionShield({
     const onKeyUp = (e: KeyboardEvent) => {
       if (e.key === 'PrintScreen' || e.keyCode === 44) {
         e.preventDefault();
-        cloakNow('Screenshot blocked! Clipboard cleared by YARN STORE BD Security.', 4000);
-        return;
-      }
-      if (e.key === 'Meta' || e.key === 'OS' || [91, 92, 93, 224].includes(e.keyCode)) {
-        setTimeout(() => tryRestore(false), 700);
+        cloakExplicitCapture('Screenshot blocked! Clipboard cleared by YARN STORE BD Security.', 2500);
       }
     };
 
-    // 3. Zero-Delay Focus, Visibility & Mouse-Leave Toolbar/Extension Guard
-    const onBlur = () => {
-      if (!settings.antiScreenRecordingBlur) return;
-      cloakNow(
-        'Window focus lost (Snipping Tool / Screen Recorder guard). Click inside to resume viewing.'
-      );
+    // 3. Silent Tab-Visibility Protection (No intrusive modal when entering or switching windows)
+    const onVisibility = () => {
+      if (document.hidden) {
+        applySilentBackgroundBlur();
+      } else {
+        clearSilentBackgroundBlur();
+      }
     };
 
     const onFocus = () => {
-      tryRestore(false);
+      clearSilentBackgroundBlur();
     };
 
-    const onVisibility = () => {
-      if (document.hidden) {
-        cloakNow('Tab backgrounded — capture & recording protection active.');
-      } else {
-        tryRestore(false);
-      }
-    };
-
-    const onMouseLeaveViewport = (e: MouseEvent) => {
-      if (!settings.antiScreenRecordingBlur) return;
-      if (e.clientY <= 4 || e.clientX <= 2 || e.clientX >= window.innerWidth - 2) {
-        cloakNow(
-          'Cursor left protected viewport (Toolbar / Capture Extension Guard). Move cursor back inside to view.'
-        );
-      }
-    };
-
-    const onMouseEnterViewport = () => {
-      if (document.hasFocus()) {
-        tryRestore(false);
-      }
-    };
-
-    // 4. Mobile Multi-Finger Screenshot Gesture Blocker (2-finger / 3-finger swipe screenshot on Android/iOS)
+    // 4. Mobile 3-Finger Swipe Screenshot Gesture Blocker
     const onTouchStart = (e: TouchEvent) => {
-      if (e.touches && e.touches.length >= 2) {
-        cloakNow('Multi-finger screenshot / capture gesture blocked!', 3000);
+      if (e.touches && e.touches.length >= 3) {
+        cloakExplicitCapture('3-finger screenshot gesture blocked!', 2200);
       }
     };
 
-    // 5. Right-Click & Drag Blocker
+    // 5. Right-Click & Image Drag Blocker (without fullscreen modal interruption)
     const onContextMenu = (e: MouseEvent) => {
       if (!settings.blockRightClickAndDrag) return;
+      const target = e.target as HTMLElement | null;
+      if (target && ['INPUT', 'TEXTAREA'].includes(target.tagName)) return;
       e.preventDefault();
-      cloakNow('Right-click & media saving are disabled.', 1800);
     };
 
     const onDragStart = (e: DragEvent) => {
@@ -248,40 +228,22 @@ export function ContentProtectionShield({
       e.preventDefault();
     };
 
-    // 6. 80ms Hardware Focus Watchdog (catches OS snipping overlays that bypass window.onblur)
-    const focusPoll = window.setInterval(() => {
-      if (!settings.antiScreenRecordingBlur) return;
-      if (document.hidden || !document.hasFocus()) {
-        if (content && content.style.visibility !== 'hidden') {
-          cloakNow(
-            'Active screen capture / focus-loss guard engaged. Click inside this page to unlock.'
-          );
-        }
-      } else if (Date.now() >= lockUntilRef.current) {
-        // Auto-recover if focus is back and lock timer expired
-      }
-    }, 80);
-
     window.addEventListener('keydown', onKeyDown, true);
     window.addEventListener('keyup', onKeyUp, true);
-    window.addEventListener('blur', onBlur, true);
     window.addEventListener('focus', onFocus, true);
     document.addEventListener('visibilitychange', onVisibility, true);
-    document.documentElement.addEventListener('mouseleave', onMouseLeaveViewport);
-    document.documentElement.addEventListener('mouseenter', onMouseEnterViewport);
     window.addEventListener('touchstart', onTouchStart, { capture: true, passive: true });
     document.addEventListener('contextmenu', onContextMenu, true);
     document.addEventListener('dragstart', onDragStart, true);
 
     return () => {
-      window.clearInterval(focusPoll);
+      if (autoClearTimerRef.current) {
+        window.clearTimeout(autoClearTimerRef.current);
+      }
       window.removeEventListener('keydown', onKeyDown, true);
       window.removeEventListener('keyup', onKeyUp, true);
-      window.removeEventListener('blur', onBlur, true);
       window.removeEventListener('focus', onFocus, true);
       document.removeEventListener('visibilitychange', onVisibility, true);
-      document.documentElement.removeEventListener('mouseleave', onMouseLeaveViewport);
-      document.documentElement.removeEventListener('mouseenter', onMouseEnterViewport);
       window.removeEventListener('touchstart', onTouchStart, true);
       document.removeEventListener('contextmenu', onContextMenu, true);
       document.removeEventListener('dragstart', onDragStart, true);
@@ -330,13 +292,19 @@ export function ContentProtectionShield({
             visibility: hidden !important;
           }
         }
+        input,
+        textarea,
+        select {
+          -webkit-user-select: text !important;
+          user-select: text !important;
+        }
       `}</style>
 
       {/* Dynamic Forensic Anti-Camera Watermark Grid */}
       {settings.watermarkOverlay && (
         <div
           aria-hidden="true"
-          className="pointer-events-none fixed inset-0 z-[45] overflow-hidden opacity-[0.045] select-none no-print"
+          className="pointer-events-none fixed inset-0 z-[45] overflow-hidden opacity-[0.04] select-none no-print"
         >
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-14 p-8 -rotate-12 scale-110">
             {Array.from({ length: 15 }).map((_, idx) => (
@@ -351,15 +319,10 @@ export function ContentProtectionShield({
         </div>
       )}
 
-      {/* Always-Mounted Synchronous 0ms Hardware Blackout Curtain */}
+      {/* Always-Mounted Synchronous 0ms Hardware Blackout Curtain (triggers ONLY on explicit capture attempts) */}
       <div
         ref={curtainRef}
         onClick={handleManualUnlock}
-        onMouseMove={() => {
-          if (document.hasFocus() && Date.now() >= lockUntilRef.current) {
-            handleManualUnlock();
-          }
-        }}
         style={{
           opacity: 0,
           visibility: 'hidden',
@@ -403,11 +366,6 @@ export function ContentProtectionShield({
   );
 }
 
-/**
- * Encrypted HTML5 Canvas Product Renderer:
- * When `protectedEnabled` is ON, renders the product image onto a poisoned `<canvas>`
- * (no `<img>` URL in DOM, right-click & extension `toDataURL` blocked!) with dynamic watermark.
- */
 export function ProtectedProductImage({
   src,
   alt,
@@ -437,7 +395,6 @@ export function ProtectedProductImage({
       const ctx = canvas.getContext('2d');
       if (ctx) {
         ctx.drawImage(img, 0, 0, w, h);
-        // Subtle baked-in anti-capture forensic watermark inside canvas pixels
         ctx.save();
         ctx.font = `bold ${Math.max(14, Math.round(w * 0.022))}px sans-serif`;
         ctx.fillStyle = 'rgba(255, 255, 255, 0.22)';

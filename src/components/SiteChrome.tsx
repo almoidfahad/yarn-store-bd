@@ -20,7 +20,6 @@ import {
   Sparkles,
   Printer,
   ShieldCheck,
-  ShieldOff,
   Moon,
   Sun,
 } from 'lucide-react';
@@ -37,8 +36,6 @@ interface GlobalPrefsContextValue {
   setCurrency: (c: 'USD' | 'EUR' | 'GBP') => void;
   darkMode: boolean;
   toggleDarkMode: () => void;
-  shieldEnabled: boolean;
-  toggleShield: () => void;
 }
 
 const GlobalPrefsContext = createContext<GlobalPrefsContextValue>({
@@ -48,8 +45,6 @@ const GlobalPrefsContext = createContext<GlobalPrefsContextValue>({
   setCurrency: () => {},
   darkMode: false,
   toggleDarkMode: () => {},
-  shieldEnabled: true,
-  toggleShield: () => {},
 });
 
 export function useGlobalPrefs() {
@@ -60,7 +55,6 @@ export function GlobalPrefsProvider({ children }: { children: React.ReactNode })
   const [lang, setLang] = useState<'EN' | 'DE' | 'ES' | 'AR'>('EN');
   const [currency, setCurrency] = useState<'USD' | 'EUR' | 'GBP'>('USD');
   const [darkMode, setDarkMode] = useState(false);
-  const [shieldEnabled, setShieldEnabled] = useState(true);
 
   useEffect(() => {
     try {
@@ -70,22 +64,6 @@ export function GlobalPrefsProvider({ children }: { children: React.ReactNode })
         document.documentElement.classList.add('dark');
       } else {
         document.documentElement.classList.remove('dark');
-      }
-
-      const savedShield = localStorage.getItem('ysb_shield_mode');
-      if (savedShield === 'off') {
-        setShieldEnabled(false);
-      } else if (savedShield === 'on') {
-        setShieldEnabled(true);
-      } else {
-        fetch('/api/security-settings', { cache: 'no-store' })
-          .then((r) => r.json())
-          .then((d) => {
-            if (d.ok && d.securitySettings) {
-              setShieldEnabled(Boolean(d.securitySettings.productScreenshotProtection));
-            }
-          })
-          .catch(() => {});
       }
     } catch {
       // Ignore storage access error
@@ -109,26 +87,6 @@ export function GlobalPrefsProvider({ children }: { children: React.ReactNode })
     });
   };
 
-  const toggleShield = () => {
-    setShieldEnabled((prev) => {
-      const next = !prev;
-      try {
-        localStorage.setItem('ysb_shield_mode', next ? 'on' : 'off');
-      } catch {
-        // Ignore
-      }
-      fetch('/api/platform', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          action: 'UPDATE_SECURITY_SETTINGS',
-          payload: { productScreenshotProtection: next },
-        }),
-      }).catch(() => {});
-      return next;
-    });
-  };
-
   return (
     <GlobalPrefsContext.Provider
       value={{
@@ -138,8 +96,6 @@ export function GlobalPrefsProvider({ children }: { children: React.ReactNode })
         setCurrency,
         darkMode,
         toggleDarkMode,
-        shieldEnabled,
-        toggleShield,
       }}
     >
       {children}
@@ -149,16 +105,7 @@ export function GlobalPrefsProvider({ children }: { children: React.ReactNode })
 
 export function PublicHeader() {
   const pathname = usePathname();
-  const {
-    lang,
-    setLang,
-    currency,
-    setCurrency,
-    darkMode,
-    toggleDarkMode,
-    shieldEnabled,
-    toggleShield,
-  } = useGlobalPrefs();
+  const { lang, setLang, currency, setCurrency, darkMode, toggleDarkMode } = useGlobalPrefs();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [prodDrop, setProdDrop] = useState(false);
   const [resDrop, setResDrop] = useState(false);
@@ -478,42 +425,14 @@ export function PublicHeader() {
             </Link>
           </nav>
 
-          {/* Right Shield ON/OFF + Dark/Normal Mode Toggle + Pill CTA + Mobile Hamburger */}
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={toggleShield}
-              aria-label={shieldEnabled ? 'Turn Anti-Screenshot Shield OFF' : 'Turn Anti-Screenshot Shield ON'}
-              title={
-                shieldEnabled
-                  ? 'Anti-Screenshot & Recording Shield is ON — Click to Turn OFF'
-                  : 'Anti-Screenshot & Recording Shield is OFF — Click to Turn ON'
-              }
-              className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-full text-xs font-extrabold border transition-all ${
-                shieldEnabled
-                  ? 'bg-[#063B19] hover:bg-[#085D28] text-emerald-100 border-emerald-500/50 shadow-sm'
-                  : 'bg-amber-50 hover:bg-amber-100 text-amber-800 border-amber-300'
-              }`}
-            >
-              {shieldEnabled ? (
-                <>
-                  <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
-                  <span>Shield ON</span>
-                </>
-              ) : (
-                <>
-                  <ShieldOff className="w-3.5 h-3.5 text-amber-700" />
-                  <span>Shield OFF</span>
-                </>
-              )}
-            </button>
-
+          {/* Right Dark/Normal Mode Toggle + Pill CTA + Mobile Hamburger */}
+          <div className="flex items-center gap-2.5">
             <button
               type="button"
               onClick={toggleDarkMode}
               aria-label={darkMode ? 'Switch to Normal Mode' : 'Switch to Dark Mode'}
               title={darkMode ? 'Switch to Normal Mode' : 'Switch to Dark Mode'}
-              className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-full text-xs font-extrabold border transition-all ${
+              className={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-extrabold border transition-all ${
                 darkMode
                   ? 'bg-[#12311F] hover:bg-[#19422A] text-amber-300 border-emerald-600/60 shadow-sm'
                   : 'bg-[#ECF7EE] hover:bg-emerald-100 text-[#08752B] border-emerald-200'
@@ -901,28 +820,17 @@ export function FloatingExportAssistants() {
   );
 }
 
-function PublicShellInner({ children }: { children: React.ReactNode }) {
-  const { shieldEnabled, toggleShield } = useGlobalPrefs();
-  return (
-    <ContentProtectionShield
-      scope="products"
-      enabledOverride={shieldEnabled}
-      onDisableShield={toggleShield}
-    >
-      <div id="top" className="ysb-public-root min-h-screen flex flex-col bg-white text-[#17231C]">
-        <PublicHeader />
-        <main className="flex-1">{children}</main>
-        <PublicFooter />
-        <FloatingExportAssistants />
-      </div>
-    </ContentProtectionShield>
-  );
-}
-
 export function PublicShell({ children }: { children: React.ReactNode }) {
   return (
     <GlobalPrefsProvider>
-      <PublicShellInner>{children}</PublicShellInner>
+      <ContentProtectionShield scope="products">
+        <div id="top" className="ysb-public-root min-h-screen flex flex-col bg-white text-[#17231C]">
+          <PublicHeader />
+          <main className="flex-1">{children}</main>
+          <PublicFooter />
+          <FloatingExportAssistants />
+        </div>
+      </ContentProtectionShield>
     </GlobalPrefsProvider>
   );
 }

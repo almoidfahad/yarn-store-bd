@@ -151,12 +151,12 @@
         "id": "spec-1",
         "counts": "Ne 10/1, 16/1, 20/1, 24/1, 26/1, 30/1, 32/1, 40/1 & 20/2, 30/2",
         "material": "100% Natural Virgin / BCI Cotton",
-        "usterCsp": "CSP 2250\u20132650+ | U% 8.8\u201310.5 | Low IPI Imperfections",
-        "yarnType": "Ring Spun \u2014 Carded, Combed & Compact",
+        "usterCsp": "CSP 2250–2650+ | U% 8.8–10.5 | Low IPI Imperfections",
+        "yarnType": "Ring Spun — Carded, Combed & Compact",
         "packaging": "24 or 12 Cones per PP Woven Bag / Export 5-Ply Corrugated Carton (45.36 kg / 50 kg net)",
         "productId": "prod-1",
         "coneWeight": "1.89 kg / 2.08 kg / 2.50 kg Paper or Dyeing Perforated Plastic Cone",
-        "composition": "100% Cotton (Raw White / Optical White / M\u00e9lange on request)",
+        "composition": "100% Cotton (Raw White / Optical White / Mélange on request)",
         "applications": [
           "Single Jersey & Fleece Knitting",
           "Woven Apparel & Twill",
@@ -165,7 +165,7 @@
         ],
         "datasheetCode": "TDS-YSB-COTTON-2026.PDF",
         "colorsAvailable": "Raw White (Ecru), Bleached White, Heather Grey & Custom Vat/Reactive Dyed Cones",
-        "qualityStandard": "Uster 5%\u201325% Statistics \u00b7 ISO 9001:2015 \u00b7 OEKO-TEX\u00ae Standard 100"
+        "qualityStandard": "Uster 5%–25% Statistics · ISO 9001:2015 · OEKO-TEX® Standard 100"
       },
       "image": "/images/prod-cotton-yarn.jpg",
       "moqKg": 1000,
@@ -176,20 +176,20 @@
       ],
       "category": "Cotton Yarn",
       "featured": true,
-      "leadTime": "12\u201318 Business Days",
+      "leadTime": "12–18 Business Days",
       "overview": "Produced in our Gazipur spinning unit using contamination-controlled BCI & imported raw cotton, our 100% Cotton Yarn delivers low hairiness, high Lea CSP strength, and superior Uster evenness for high-speed European and Asian knitting and weaving machines.",
       "shortName": "Cotton Yarn",
       "archivedAt": null,
       "highlights": [
         "Counts: Ne 10s, 16s, 20s, 24s, 26s, 30s, 32s, 40s (Single & Plied)",
-        "Ring Spun \u00b7 Carded (KH/KW) \u00b7 Combed (CH/CW) \u00b7 Compact",
-        "Uster Tester 6 Inspected & OEKO-TEX\u00ae Standard 100 Certified"
+        "Ring Spun · Carded (KH/KW) · Combed (CH/CW) · Compact",
+        "Uster Tester 6 Inspected & OEKO-TEX® Standard 100 Certified"
       ],
       "supplyType": "Manufactured by YARN STORE BD",
-      "shortDescription": "Export-grade Ne 10s\u201340s Carded, Combed & Compact Ring Spun 100% Cotton Yarn for circular knitting, weaving, and RMG garments.",
+      "shortDescription": "Export-grade Ne 10s–40s Carded, Combed & Compact Ring Spun 100% Cotton Yarn for circular knitting, weaving, and RMG garments.",
       "indicativeFobNote": "Custom FOB Chattogram / CIF Port Quotation within 12h",
       "monthlyCapacityMt": 320,
-      "facilityOrPartnerName": "YARN STORE BD \u2014 Gazipur Ring Spinning Unit-1"
+      "facilityOrPartnerName": "YARN STORE BD — Gazipur Ring Spinning Unit-1"
     },
     {
       "id": "prod-2",
@@ -200,11 +200,11 @@
         "id": "spec-2",
         "counts": "75D/36F, 100D/36F, 150D/48F, 150D/96F, 300D/96F & Spun Ne 20/2, 40/2, 60/2",
         "material": "100% Polyester (Virgin PET Melt / Optional GRS Certified Recycled)",
-        "usterCsp": "Tenacity >= 3.8 cN/dtex | Elongation 18%\u201324% | Crimp Stability > 82%",
+        "usterCsp": "Tenacity >= 3.8 cN/dtex | Elongation 18%–24% | Crimp Stability > 82%",
         "yarnType": "Filament Yarn (DTY / FDY) & Ring Spun Sewing/Weaving Yarn",
         "packaging": "6 or 8 Cylindrical Bobbins per Export Carton, Stretch-Wrapped on Fumigated Pallets",
         "productId": "prod-2",
-        "coneWeight": "4.50 kg \u2013 5.50 kg per DTY Bobbin (Color-coded nose tip by denier/lot)",
+        "coneWeight": "4.50 kg – 5.50 kg per DTY Bobbin (Color-coded nose tip by denier/lot)",
         "composition": "100% Continuous Polyester Filament / 100% Spun Polyester",
         "applications": [
           "Activewear & Interlock Knitting",
@@ -214,7 +214,7 @@
         ],
         "datasheetCode": "TDS-YSB-POLYESTER-2026.PDF",
         "colorsAvailable": "Raw White Semi-Dull (SD), Bright (BR), Black Dope-Dyed & 200+ Dope-Dyed Shades",
-        "qualityStandard": "AA-Grade Export Inspection \u00b7 ISO 9001:2015 \u00b7 OEKO-TEX\u00ae Class I/II"
+        "qualityStandard": "AA-Grade Export Inspection · ISO 9001:2015 · OEKO-TEX® Class I/II"
       },
       "image": "/images/prod-polyester-yarn.jpg",
       "moqKg": 1000,
@@ -225,20 +225,20 @@
       ],
       "category": "Polyester Yarn",
       "featured": true,
-      "leadTime": "10\u201315 Business Days",
+      "leadTime": "10–15 Business Days",
       "overview": "Sourced and quality-audited through our verified ISO-certified partner filament mills in Bangladesh, our 100% Polyester Yarn covers exact brochure counts 75/36, 150D/48F, and 300D/96F in Semi-Dull (SD), Bright (BR), and Trilobal finishes for sportswear, activewear, woven linings, and industrial textiles.",
       "shortName": "Polyester Yarn",
       "archivedAt": null,
       "highlights": [
         "Brochure Counts: 75D/36F, 150D/48F, 300D/96F + 100D/36F, 200D/96F",
         "DTY (NIM / SIM / HIM), FDY & Virgin Spun Polyester",
-        "AA-Grade Evenness \u00b7 Zero Broken Filaments \u00b7 GRS Recycled Option"
+        "AA-Grade Evenness · Zero Broken Filaments · GRS Recycled Option"
       ],
       "supplyType": "Supplied through Verified Manufacturing Partner",
       "shortDescription": "High-tenacity 75D/36F, 150D/48F & 300D/96F Polyester Filament (DTY / FDY) & Spun Polyester Yarn with uniform dye uptake.",
       "indicativeFobNote": "Container-scale FOB / CIF pricing verified per denier & luster",
       "monthlyCapacityMt": 450,
-      "facilityOrPartnerName": "Verified Partner Mill \u2014 Meghna Filament & Texturizing Complex"
+      "facilityOrPartnerName": "Verified Partner Mill — Meghna Filament & Texturizing Complex"
     },
     {
       "id": "prod-3",
@@ -249,21 +249,21 @@
         "id": "spec-3",
         "counts": "40/2, 60/2 (2-Ply Precision Twisted)",
         "material": "100% Long-Staple Gassed & Mercerized Cotton / Trilobal Embroidery Grade",
-        "usterCsp": "Breaking Strength 1,150\u20131,380 cN | Zero-lint singed surface",
+        "usterCsp": "Breaking Strength 1,150–1,380 cN | Zero-lint singed surface",
         "yarnType": "Gassed, Mercerized & Silicone-Finished Multi-Head Embroidery Thread",
-        "packaging": "12 Cones per Inner Box \u00b7 120 Cones per Master Export Carton",
+        "packaging": "12 Cones per Inner Box · 120 Cones per Master Export Carton",
         "productId": "prod-3",
-        "coneWeight": "2,500m / 3,000m / 5,000m King Spools (115g \u2013 135g net per spool)",
+        "coneWeight": "2,500m / 3,000m / 5,000m King Spools (115g – 135g net per spool)",
         "composition": "100% Mercerized Egyptian/Pima-Grade Cotton (Also available in Viscose/Polyester)",
         "applications": [
           "Garment Logo & Fashion Embroidery",
           "Home Linen & Bedding Monograms",
-          "Caps, Badges & Appliqu\u00e9",
+          "Caps, Badges & Appliqué",
           "Schiffli & Lace Embroidery"
         ],
         "datasheetCode": "TDS-YSB-EMBROIDERY-2026.PDF",
-        "colorsAvailable": "480+ Standard Shade Card Colors + Custom Pantone\u00ae Lab-Dip",
-        "qualityStandard": "ISO 105-C06 Colorfastness Grade 4.5 \u00b7 OEKO-TEX\u00ae Standard 100 Annex 6 (Babywear Safe)"
+        "colorsAvailable": "480+ Standard Shade Card Colors + Custom Pantone® Lab-Dip",
+        "qualityStandard": "ISO 105-C06 Colorfastness Grade 4.5 · OEKO-TEX® Standard 100 Annex 6 (Babywear Safe)"
       },
       "image": "/images/prod-embroidery-thread.jpg",
       "moqKg": 300,
@@ -274,20 +274,20 @@
       ],
       "category": "Embroidery Thread",
       "featured": true,
-      "leadTime": "7\u201314 Business Days",
-      "overview": "Manufactured directly under MHR Thread & Accessories, our 40/2 and 60/2 Embroidery Threads are engineered for 1,000\u20131,200 SPM multi-head Tajima, Barudan, and SWF industrial embroidery machines with zero thread breaks, Grade 4.5+ wash fastness, and silky color brilliance.",
+      "leadTime": "7–14 Business Days",
+      "overview": "Manufactured directly under MHR Thread & Accessories, our 40/2 and 60/2 Embroidery Threads are engineered for 1,000–1,200 SPM multi-head Tajima, Barudan, and SWF industrial embroidery machines with zero thread breaks, Grade 4.5+ wash fastness, and silky color brilliance.",
       "shortName": "Embroidery Thread",
       "archivedAt": null,
       "highlights": [
         "Exact Brochure Counts: 40/2 & 60/2 (120D/2 Equivalent)",
-        "480+ Stocked Shades + Pantone\u00ae Lab-Dip Matching in 72 Hours",
+        "480+ Stocked Shades + Pantone® Lab-Dip Matching in 72 Hours",
         "Lubricated Low-Friction Finish for High-Speed Multi-Head Machines"
       ],
       "supplyType": "Manufactured by YARN STORE BD",
       "shortDescription": "Silky high-luster 40/2 & 60/2 Mercerized Cotton & High-Speed Industrial Embroidery Thread in 480+ colorfast shades.",
       "indicativeFobNote": "Available in 3,000m / 5,000m King Spools with Master Shade Card",
       "monthlyCapacityMt": 95,
-      "facilityOrPartnerName": "YARN STORE BD \u2014 MHR Precision Thread & Dyeing Division"
+      "facilityOrPartnerName": "YARN STORE BD — MHR Precision Thread & Dyeing Division"
     },
     {
       "id": "prod-4",
@@ -298,11 +298,11 @@
         "id": "spec-4",
         "counts": "Ne 12/1 to Ne 40/1 & Plied Ne 20/2 to 40/2",
         "material": "100% Cotton / CVC (60/40) / PC (65/35) Precision Wound Cones",
-        "usterCsp": "Air-Splice Retention > 88% | Shore Hardness 68\u201372 (Knitting) / 32\u201338 (Soft Dyeing)",
-        "yarnType": "Auto-Coner Air-Spliced Waxed / Unwaxed Tapered Cones (4\u00b020' & 5\u00b057')",
+        "usterCsp": "Air-Splice Retention > 88% | Shore Hardness 68–72 (Knitting) / 32–38 (Soft Dyeing)",
+        "yarnType": "Auto-Coner Air-Spliced Waxed / Unwaxed Tapered Cones (4°20' & 5°57')",
         "packaging": "Individual Moisture-Proof Polybag -> 5-Ply Export Carton or PP Bag -> Stretch-Wrapped Pallet",
         "productId": "prod-4",
-        "coneWeight": "1.25 kg (Soft Dye Cone) \u00b7 1.89 kg \u00b7 2.08 kg \u00b7 2.50 kg Jumbo Cone",
+        "coneWeight": "1.25 kg (Soft Dye Cone) · 1.89 kg · 2.08 kg · 2.50 kg Jumbo Cone",
         "composition": "100% Cotton or Custom Buyer Blend Ratio",
         "applications": [
           "Package Yarn Dyeing",
@@ -312,7 +312,7 @@
         ],
         "datasheetCode": "TDS-YSB-CONES-2026.PDF",
         "colorsAvailable": "Natural Ecru, Optical Bleached & Package-Dyed Custom Lots",
-        "qualityStandard": "Electronic Clearer Monitored \u00b7 ISO 9001:2015 \u00b7 Export Phytosanitary Compliant"
+        "qualityStandard": "Electronic Clearer Monitored · ISO 9001:2015 · Export Phytosanitary Compliant"
       },
       "image": "/images/prod-yarn-cones.jpg",
       "moqKg": 1500,
@@ -323,7 +323,7 @@
       ],
       "category": "Yarn Cones",
       "featured": true,
-      "leadTime": "10\u201316 Business Days",
+      "leadTime": "10–16 Business Days",
       "overview": "Precision-wound on Schlafhorst & Muratec Auto-Coners with electronic yarn clearers and knotless air-splicing, our Cotton Yarn Cones guarantee uniform package density for direct warping, package dyeing, and high-speed circular knitting with export-ready palletized protection.",
       "shortName": "Yarn Cones",
       "archivedAt": null,
@@ -336,7 +336,7 @@
       "shortDescription": "Precision splicer-wound Auto-Coner Cotton & Blended Yarn Cones on paper or perforated dyeing cones for bulk export.",
       "indicativeFobNote": "20ft FCL (~9.5 MT) & 40ft HQ (~22.5 MT) optimized loading",
       "monthlyCapacityMt": 380,
-      "facilityOrPartnerName": "YARN STORE BD \u2014 Precision Auto-Coner Winding & Bulk Export Unit"
+      "facilityOrPartnerName": "YARN STORE BD — Precision Auto-Coner Winding & Bulk Export Unit"
     }
   ],
   "leads": [
@@ -344,7 +344,7 @@
       "id": "lead-1793492818389",
       "code": "006",
       "email": "almoidfahad@gmail.com",
-      "notes": "RFQ YSB-RFQ-2026-006 \u00b7 CIF Port of Savannah / Main Port. Hi, I am Fahad. I'm testing my company info",
+      "notes": "RFQ YSB-RFQ-2026-006 · CIF Port of Savannah / Main Port. Hi, I am Fahad. I'm testing my company info",
       "phone": "+880 17273343558",
       "source": "Direct Website",
       "status": "Qualified",
@@ -353,7 +353,7 @@
       "country": "United States",
       "product": "Cotton Yarn",
       "website": "almoidfahadllc.com",
-      "aiReason": "Personal email \u2014 domain verification advised \u00b7 Bulk container-scale requirement (>= 5 MT) \u00b7 Company website provided",
+      "aiReason": "Personal email — domain verification advised · Bulk container-scale requirement (>= 5 MT) · Company website provided",
       "buyerName": "Al Moid Fahad",
       "dateLabel": "Today",
       "activities": [
@@ -373,7 +373,7 @@
           "id": "act-1793492818435-2",
           "date": "Just now",
           "actor": "AI Lead Scorer",
-          "action": "Scored 73/100 (Needs Verification) \u2014 Personal email \u2014 domain verification advised \u00b7 Bulk container-scale requirement (>= 5 MT) \u00b7 Company website provided"
+          "action": "Scored 73/100 (Needs Verification) — Personal email — domain verification advised · Bulk container-scale requirement (>= 5 MT) · Company website provided"
         }
       ],
       "aiPriority": "Needs Verification",
@@ -395,7 +395,7 @@
       "country": "USA",
       "product": "Cotton Yarn",
       "website": "https://abctextiles.com",
-      "aiReason": "Verified US Importer \u00b7 Corporate domain \u00b7 Repeat container volume",
+      "aiReason": "Verified US Importer · Corporate domain · Repeat container volume",
       "buyerName": "John Smith",
       "dateLabel": "10 Apr",
       "activities": [
@@ -403,7 +403,7 @@
           "id": "act-1",
           "date": "10 Apr",
           "actor": "System AI",
-          "action": "Scored 94/100 (High Priority \u2014 Verified Importer)"
+          "action": "Scored 94/100 (High Priority — Verified Importer)"
         },
         {
           "id": "act-2",
@@ -431,7 +431,7 @@
       "country": "Germany",
       "product": "Polyester Yarn",
       "website": "https://globalfabrics.de",
-      "aiReason": "Industrial EU Buyer \u00b7 OEKO-TEX Class I spec \u00b7 12 MT monthly potential",
+      "aiReason": "Industrial EU Buyer · OEKO-TEX Class I spec · 12 MT monthly potential",
       "buyerName": "Markus Weber",
       "dateLabel": "09 Apr",
       "activities": [
@@ -461,7 +461,7 @@
       "country": "UK",
       "product": "Embroidery Thread",
       "website": "https://textilesolutions.co.uk",
-      "aiReason": "UK Wholesale Distributor \u00b7 Official Quote Q-2026-104 sent",
+      "aiReason": "UK Wholesale Distributor · Official Quote Q-2026-104 sent",
       "buyerName": "David Wilson",
       "dateLabel": "08 Apr",
       "activities": [
@@ -491,7 +491,7 @@
       "country": "UAE",
       "product": "Cotton Yarn",
       "website": "https://fashionworld.ae",
-      "aiReason": "Regional GCC Distributor \u00b7 DHL Sample Cones dispatched",
+      "aiReason": "Regional GCC Distributor · DHL Sample Cones dispatched",
       "buyerName": "Khalid Al-Mansoor",
       "dateLabel": "07 Apr",
       "activities": [
@@ -521,8 +521,8 @@
       "country": "Germany",
       "product": "Polyester Yarn",
       "website": "https://eurotextile.de",
-      "aiReason": "40ft HQ Repeat Buyer \u00b7 Finalizing L/C at Sight terms",
-      "buyerName": "Anna M\u00fcller",
+      "aiReason": "40ft HQ Repeat Buyer · Finalizing L/C at Sight terms",
+      "buyerName": "Anna Müller",
       "dateLabel": "06 Apr",
       "activities": [
         {
@@ -709,7 +709,7 @@
       "unit": "KG",
       "rfqRef": "YSB-RFQ-2026-006",
       "country": "United States",
-      "product": "Cotton Yarn \u2014 Ne 30/1 Combed",
+      "product": "Cotton Yarn — Ne 30/1 Combed",
       "currency": "USD",
       "quantity": 5000,
       "createdAt": "2026-11-01",
@@ -723,7 +723,7 @@
       "deliveryTime": "14 Business Days",
       "paymentTerms": "100% Irrevocable L/C at Sight",
       "validityDate": "2026-11-30",
-      "specification": "Ring Spun Combed / Filament \u00b7 CIF Port of Savannah / Main Port",
+      "specification": "Ring Spun Combed / Filament · CIF Port of Savannah / Main Port",
       "approvalStatus": "Sent to Buyer"
     },
     {
@@ -731,7 +731,7 @@
       "unit": "KG",
       "rfqRef": "YSB-RFQ-2026-001",
       "country": "USA",
-      "product": "100% Cotton Yarn \u2014 Ne 30/1 Combed Waxed",
+      "product": "100% Cotton Yarn — Ne 30/1 Combed Waxed",
       "currency": "USD",
       "quantity": 18000,
       "createdAt": "2026-10-26",
@@ -745,7 +745,7 @@
       "deliveryTime": "15 Business Days from L/C Confirmation",
       "paymentTerms": "100% Irrevocable L/C at Sight",
       "validityDate": "2026-11-15",
-      "specification": "Ring Spun Combed \u00b7 1.89kg Paper Cone \u00b7 OEKO-TEX Std 100 \u00b7 Manufactured by YARN STORE BD",
+      "specification": "Ring Spun Combed · 1.89kg Paper Cone · OEKO-TEX Std 100 · Manufactured by YARN STORE BD",
       "approvalStatus": "Sent to Buyer"
     },
     {
@@ -753,7 +753,7 @@
       "unit": "KG",
       "rfqRef": "YSB-RFQ-2026-002",
       "country": "Germany",
-      "product": "100% Polyester Yarn \u2014 150D/48F DTY Semi-Dull",
+      "product": "100% Polyester Yarn — 150D/48F DTY Semi-Dull",
       "currency": "EUR",
       "quantity": 22000,
       "createdAt": "2026-10-28",
@@ -767,7 +767,7 @@
       "deliveryTime": "12 Business Days",
       "paymentTerms": "30% T/T Advance, 70% Against B/L Copy",
       "validityDate": "2026-11-18",
-      "specification": "AA-Grade Filament \u00b7 5.0kg Bobbin \u00b7 Verified Partner Mill Supply",
+      "specification": "AA-Grade Filament · 5.0kg Bobbin · Verified Partner Mill Supply",
       "approvalStatus": "Approved"
     },
     {
@@ -775,7 +775,7 @@
       "unit": "KG",
       "rfqRef": "YSB-RFQ-2026-003",
       "country": "UK",
-      "product": "Cotton Embroidery Thread \u2014 40/2 & 60/2 Mercerized",
+      "product": "Cotton Embroidery Thread — 40/2 & 60/2 Mercerized",
       "currency": "GBP",
       "quantity": 2400,
       "createdAt": "2026-10-29",
@@ -789,7 +789,7 @@
       "deliveryTime": "10 Business Days",
       "paymentTerms": "40% T/T Deposit, 60% Prior to Dispatch",
       "validityDate": "2026-11-20",
-      "specification": "5,000m King Spools \u00b7 36 Assorted Pantone Shades \u00b7 Manufactured by YARN STORE BD",
+      "specification": "5,000m King Spools · 36 Assorted Pantone Shades · Manufactured by YARN STORE BD",
       "approvalStatus": "Sent to Buyer"
     },
     {
@@ -797,7 +797,7 @@
       "unit": "MT",
       "rfqRef": "YSB-RFQ-2026-004",
       "country": "Turkey",
-      "product": "Cotton Yarn Cones \u2014 Ne 24/1 Soft Perforated Dye Cones",
+      "product": "Cotton Yarn Cones — Ne 24/1 Soft Perforated Dye Cones",
       "currency": "USD",
       "quantity": 22,
       "createdAt": "2026-10-30",
@@ -811,7 +811,7 @@
       "deliveryTime": "14 Business Days",
       "paymentTerms": "Irrevocable L/C at Sight",
       "validityDate": "2026-11-25",
-      "specification": "1.25kg Soft Dyeing Cone (Shore 34) \u00b7 Palletized \u00b7 Manufactured by YARN STORE BD",
+      "specification": "1.25kg Soft Dyeing Cone (Shore 34) · Palletized · Manufactured by YARN STORE BD",
       "approvalStatus": "Pending Manager Approval"
     },
     {
@@ -819,7 +819,7 @@
       "unit": "KG",
       "rfqRef": "YSB-RFQ-2026-005",
       "country": "UAE",
-      "product": "100% Cotton Yarn \u2014 Ne 20/1 Carded Knitting",
+      "product": "100% Cotton Yarn — Ne 20/1 Carded Knitting",
       "currency": "USD",
       "quantity": 9500,
       "createdAt": "2026-10-22",
@@ -833,7 +833,7 @@
       "deliveryTime": "11 Business Days",
       "paymentTerms": "30% T/T, 70% CAD",
       "validityDate": "2026-11-10",
-      "specification": "Ring Spun Carded \u00b7 2.08kg Cones \u00b7 Export Cartons",
+      "specification": "Ring Spun Carded · 2.08kg Cones · Export Cartons",
       "approvalStatus": "Accepted"
     }
   ],
@@ -1022,29 +1022,29 @@
     {
       "id": "fac-1",
       "code": "YSB-MFG-01",
-      "name": "YARN STORE BD \u2014 Gazipur Ring Spinning & Auto-Coner Unit",
+      "name": "YARN STORE BD — Gazipur Ring Spinning & Auto-Coner Unit",
       "type": "Own Manufacturing Facility",
       "status": "Active & Audited",
       "location": "Gazipur Industrial Belt, Dhaka Division, Bangladesh",
       "certifications": [
         "ISO 9001:2015",
-        "OEKO-TEX\u00ae Standard 100",
+        "OEKO-TEX® Standard 100",
         "BCI Member"
       ],
-      "specialization": "100% Cotton Yarn (Ne 10s\u201340s Carded/Combed) & Precision Wound Yarn Cones",
+      "specialization": "100% Cotton Yarn (Ne 10s–40s Carded/Combed) & Precision Wound Yarn Cones",
       "utilizationPct": 84,
       "monthlyCapacityMt": 380
     },
     {
       "id": "fac-2",
       "code": "YSB-MFG-02",
-      "name": "MHR Thread & Accessories \u2014 Embroidery Thread & Dyeing Plant",
+      "name": "MHR Thread & Accessories — Embroidery Thread & Dyeing Plant",
       "type": "Own Manufacturing Facility",
       "status": "Active & Audited",
       "location": "Narayanganj BSCIC Textile Zone, Bangladesh",
       "certifications": [
         "ISO 9001:2015",
-        "OEKO-TEX\u00ae Annex 6",
+        "OEKO-TEX® Annex 6",
         "AZO-Free Dye Lab"
       ],
       "specialization": "Cotton Embroidery Thread (40/2 & 60/2), Gassing, Mercerizing & High-Fastness Cone Dyeing",
@@ -1063,7 +1063,7 @@
         "GRS Recycled Certified",
         "YARN STORE BD QA Audited"
       ],
-      "specialization": "100% Polyester Filament Yarn \u2014 75D/36F, 150D/48F, 300D/96F (DTY / FDY)",
+      "specialization": "100% Polyester Filament Yarn — 75D/36F, 150D/48F, 300D/96F (DTY / FDY)",
       "utilizationPct": 76,
       "monthlyCapacityMt": 450
     },
@@ -1079,7 +1079,7 @@
         "BCI",
         "YARN STORE BD QA Audited"
       ],
-      "specialization": "CVC, PC (65/35), M\u00e9lange & Open-End Rotor Yarn Bulk Export Supply",
+      "specialization": "CVC, PC (65/35), Mélange & Open-End Rotor Yarn Bulk Export Supply",
       "utilizationPct": 71,
       "monthlyCapacityMt": 300
     }
@@ -1089,7 +1089,7 @@
       "id": "em-1793496570173",
       "sentAt": "Just now (Resend)",
       "status": "Delivered",
-      "subject": "Official Quotation YSB-QT-2026-111 (Cotton Yarn \u2014 Ne 30/1 Combed) \u2014 YARN STORE BD",
+      "subject": "Official Quotation YSB-QT-2026-111 (Cotton Yarn — Ne 30/1 Combed) — YARN STORE BD",
       "trigger": "Approved PDF Quotation Sent",
       "recipient": "almoidfahad@gmail.com"
     },
@@ -1097,7 +1097,7 @@
       "id": "em-1793492820372-buyer",
       "sentAt": "Just now (Resend)",
       "status": "Delivered",
-      "subject": "[YSB-RFQ-2026-006] Quotation Request Received \u2014 YARN STORE BD",
+      "subject": "[YSB-RFQ-2026-006] Quotation Request Received — YARN STORE BD",
       "trigger": "New RFQ Auto-Confirmation",
       "recipient": "almoidfahad@gmail.com"
     },
@@ -1105,7 +1105,7 @@
       "id": "em-1793492820372-sales",
       "sentAt": "Just now (Resend)",
       "status": "Queued",
-      "subject": "New United States RFQ [YSB-RFQ-2026-006] \u2014 almoidfahadllc@gmail.com (5000 KG)",
+      "subject": "New United States RFQ [YSB-RFQ-2026-006] — almoidfahadllc@gmail.com (5000 KG)",
       "trigger": "Sales Team Instant Alert",
       "recipient": "info@yarnstorebd.com"
     },
@@ -1113,7 +1113,7 @@
       "id": "em-1793492502133",
       "sentAt": "Just now (Resend)",
       "status": "Delivered",
-      "subject": "Follow-up on Quotation YSB-QT-2026-101 \u2014 YARN STORE BD Export Desk",
+      "subject": "Follow-up on Quotation YSB-QT-2026-101 — YARN STORE BD Export Desk",
       "trigger": "Sales Desk Direct Reply",
       "recipient": "almoidfahad@gmail.com"
     },
@@ -1121,7 +1121,7 @@
       "id": "em-1",
       "sentAt": "10 mins ago",
       "status": "Opened",
-      "subject": "[YSB-RFQ-2026-001] We have received your Yarn Quotation Request \u2014 YARN STORE BD",
+      "subject": "[YSB-RFQ-2026-001] We have received your Yarn Quotation Request — YARN STORE BD",
       "trigger": "New RFQ Auto-Confirmation",
       "recipient": "john.smith@abctextiles.com"
     },
@@ -1129,7 +1129,7 @@
       "id": "em-2",
       "sentAt": "10 mins ago",
       "status": "Delivered",
-      "subject": "\ud83d\udd25 High-Priority USA Lead (Score 94): ABC Textiles Ltd \u2014 18,000 KG Cotton Yarn",
+      "subject": "🔥 High-Priority USA Lead (Score 94): ABC Textiles Ltd — 18,000 KG Cotton Yarn",
       "trigger": "Sales Team Instant Alert",
       "recipient": "sales@yarnstorebd.com"
     },
@@ -1137,7 +1137,7 @@
       "id": "em-3",
       "sentAt": "2 hours ago",
       "status": "Opened",
-      "subject": "Official Quotation YSB-QT-2026-104 \u2014 Cotton Embroidery Thread (40/2 & 60/2)",
+      "subject": "Official Quotation YSB-QT-2026-104 — Cotton Embroidery Thread (40/2 & 60/2)",
       "trigger": "Approved PDF Quotation Sent",
       "recipient": "d.wilson@textilesolutions.co.uk"
     },
@@ -1145,7 +1145,7 @@
       "id": "em-4",
       "sentAt": "5 hours ago",
       "status": "Delivered",
-      "subject": "Sample Cones Dispatched via FedEx #FDX-772940118 \u2014 YARN STORE BD",
+      "subject": "Sample Cones Dispatched via FedEx #FDX-772940118 — YARN STORE BD",
       "trigger": "Sample Dispatched Notification",
       "recipient": "john.smith@abctextiles.com"
     },
@@ -1162,7 +1162,7 @@
     {
       "id": "notif-1793496515955",
       "color": "orange",
-      "title": "Draft Quote YSB-QT-2026-111 created for almoidfahadllc@gmail.com \u2014 awaiting Manager approval",
+      "title": "Draft Quote YSB-QT-2026-111 created for almoidfahadllc@gmail.com — awaiting Manager approval",
       "unread": false,
       "timeAgo": "Just now"
     },
@@ -1358,7 +1358,7 @@
       "id": "aud-1",
       "role": "Super Admin",
       "actor": "Md. Habibur Rahman",
-      "action": "Approved Quotation YSB-QT-2026-104 (GBP 17,760 \u2014 FOB Chattogram)",
+      "action": "Approved Quotation YSB-QT-2026-104 (GBP 17,760 — FOB Chattogram)",
       "timestamp": "Today, 11:20 AM"
     },
     {
@@ -1379,27 +1379,27 @@
   "prepChecklist": [
     {
       "id": 1,
-      "label": "Company legal name \u0993 registration details verified",
+      "label": "Company legal name ও registration details verified",
       "completed": true
     },
     {
       "id": 2,
-      "label": "\u09a8\u09bf\u099c\u09b8\u09cd\u09ac Factory + Trading / Sourcing Division clearly separated",
+      "label": "নিজস্ব Factory + Trading / Sourcing Division clearly separated",
       "completed": true
     },
     {
       "id": 3,
-      "label": "\u09b8\u09a0\u09bf\u0995 Product List \u0993 Technical Specifications (10s\u201340s, 75/36, 150D/48F, 300D/96F, 40/2, 60/2)",
+      "label": "সঠিক Product List ও Technical Specifications (10s–40s, 75/36, 150D/48F, 300D/96F, 40/2, 60/2)",
       "completed": true
     },
     {
       "id": 4,
-      "label": "\u09aa\u09cd\u09b0\u09a4\u09bf\u099f\u09bf \u09aa\u09a3\u09cd\u09af\u09c7\u09b0 MOQ \u09a8\u09bf\u09b0\u09cd\u09a7\u09be\u09b0\u09a3",
+      "label": "প্রতিটি পণ্যের MOQ নির্ধারণ",
       "completed": true
     },
     {
       "id": 5,
-      "label": "\u09ae\u09be\u09b8\u09bf\u0995 Supply Capacity \u09af\u09be\u099a\u09be\u0987",
+      "label": "মাসিক Supply Capacity যাচাই",
       "completed": true
     },
     {
@@ -1409,129 +1409,129 @@
     },
     {
       "id": 7,
-      "label": "Product Sample Availability \u0993 Courier Workflow",
+      "label": "Product Sample Availability ও Courier Workflow",
       "completed": true
     },
     {
       "id": 8,
-      "label": "Quality Test Reports \u0993 Valid Certifications (ISO / OEKO-TEX / BCI)",
+      "label": "Quality Test Reports ও Valid Certifications (ISO / OEKO-TEX / BCI)",
       "completed": true
     },
     {
       "id": 9,
-      "label": "Export Registration Certificate (ERC) \u0993 Export Documents",
+      "label": "Export Registration Certificate (ERC) ও Export Documents",
       "completed": true
     },
     {
       "id": 10,
-      "label": "Export Destinations \u0993 Incoterms (EXW, FOB, CFR, CIF, DAP)",
+      "label": "Export Destinations ও Incoterms (EXW, FOB, CFR, CIF, DAP)",
       "completed": true
     },
     {
       "id": 11,
-      "label": "Office, Factory, Warehouse \u0993 Product Photography",
+      "label": "Office, Factory, Warehouse ও Product Photography",
       "completed": true
     },
     {
       "id": 12,
-      "label": "Official Email (info@yarnstorebd.com), WhatsApp (+880 1677 852904) \u0993 Sales Desk",
+      "label": "Official Email (info@yarnstorebd.com), WhatsApp (+880 1677 852904) ও Sales Desk",
       "completed": true
     }
   ],
   "launchChecklist": [
     {
       "id": 1,
-      "label": "Domain \u0993 SSL (HTTPS) \u09b8\u09a0\u09bf\u0995\u09ad\u09be\u09ac\u09c7 \u0995\u09be\u099c \u0995\u09b0\u099b\u09c7",
+      "label": "Domain ও SSL (HTTPS) সঠিকভাবে কাজ করছে",
       "completed": true
     },
     {
       "id": 2,
-      "label": "\u09b8\u09ac Product-\u098f\u09b0 Technical Details \u09af\u09be\u099a\u09be\u0987 \u0995\u09b0\u09be \u09b9\u09df\u09c7\u099b\u09c7",
+      "label": "সব Product-এর Technical Details যাচাই করা হয়েছে",
       "completed": true
     },
     {
       "id": 3,
-      "label": "Manufacturing \u0993 Trading Source \u0986\u09b2\u09be\u09a6\u09be \u0995\u09b0\u09be \u09b9\u09df\u09c7\u099b\u09c7",
+      "label": "Manufacturing ও Trading Source আলাদা করা হয়েছে",
       "completed": true
     },
     {
       "id": 4,
-      "label": "\u09b8\u09ac Contact Details \u0993 QR Code \u09b8\u09a0\u09bf\u0995",
+      "label": "সব Contact Details ও QR Code সঠিক",
       "completed": true
     },
     {
       "id": 5,
-      "label": "Multi-step RFQ Form \u0993 Auto Reference Number \u0995\u09be\u099c \u0995\u09b0\u099b\u09c7",
+      "label": "Multi-step RFQ Form ও Auto Reference Number কাজ করছে",
       "completed": true
     },
     {
       "id": 6,
-      "label": "Admin Dashboard \u0993 8-Role RBAC \u09a8\u09bf\u09b0\u09be\u09aa\u09a6",
+      "label": "Admin Dashboard ও 8-Role RBAC নিরাপদ",
       "completed": true
     },
     {
       "id": 7,
-      "label": "Buyer Portal Login \u0993 Data Privacy \u09aa\u09b0\u09c0\u0995\u09cd\u09b7\u09be \u0995\u09b0\u09be \u09b9\u09df\u09c7\u099b\u09c7",
+      "label": "Buyer Portal Login ও Data Privacy পরীক্ষা করা হয়েছে",
       "completed": true
     },
     {
       "id": 8,
-      "label": "Quotation PDF \u09a4\u09c8\u09b0\u09bf \u0993 Manager Approval \u0995\u09be\u099c \u0995\u09b0\u099b\u09c7",
+      "label": "Quotation PDF তৈরি ও Manager Approval কাজ করছে",
       "completed": true
     },
     {
       "id": 9,
-      "label": "Transactional Email Notification \u0995\u09be\u099c \u0995\u09b0\u099b\u09c7",
+      "label": "Transactional Email Notification কাজ করছে",
       "completed": true
     },
     {
       "id": 10,
-      "label": "Mobile, Tablet \u0993 Desktop Responsive \u09af\u09be\u099a\u09be\u0987",
+      "label": "Mobile, Tablet ও Desktop Responsive যাচাই",
       "completed": true
     },
     {
       "id": 11,
-      "label": "Google Analytics 4 \u0993 Search Console \u09b0\u09c7\u09a1\u09bf",
+      "label": "Google Analytics 4 ও Search Console রেডি",
       "completed": true
     },
     {
       "id": 12,
-      "label": "Technical SEO, Schema.org, Robots.txt \u0993 XML Sitemap \u09af\u09be\u099a\u09be\u0987",
+      "label": "Technical SEO, Schema.org, Robots.txt ও XML Sitemap যাচাই",
       "completed": true
     },
     {
       "id": 13,
-      "label": "Database Soft-Archive \u0993 Backup Plan \u09b8\u09ae\u09cd\u09aa\u09a8\u09cd\u09a8",
+      "label": "Database Soft-Archive ও Backup Plan সম্পন্ন",
       "completed": true
     },
     {
       "id": 14,
-      "label": "Privacy Policy \u0993 Terms & Conditions \u09aa\u09cd\u09b0\u0995\u09be\u09b6\u09bf\u09a4",
+      "label": "Privacy Policy ও Terms & Conditions প্রকাশিত",
       "completed": true
     },
     {
       "id": 15,
-      "label": "Sales Team CRM & Follow-up Workflow \u09b0\u09c7\u09a1\u09bf",
+      "label": "Sales Team CRM & Follow-up Workflow রেডি",
       "completed": true
     }
   ],
   "marketing90Day": [
     {
-      "days": "Days 1\u201330",
-      "kpis": "100% Indexed Pages \u00b7 42 Qualified Organic Enquiries",
+      "days": "Days 1–30",
+      "kpis": "100% Indexed Pages · 42 Qualified Organic Enquiries",
       "focus": "Technical Website SEO, Dedicated Product URLs (/products/cotton-yarn, etc.), Schema & LinkedIn Company Export Desk",
       "phase": "Phase 1",
       "status": "Completed"
     },
     {
-      "days": "Days 31\u201360",
-      "kpis": "54 Active Buyer Threads \u00b7 19 Sample Cones Dispatched",
+      "days": "Days 31–60",
+      "kpis": "54 Active Buyer Threads · 19 Sample Cones Dispatched",
       "focus": "Direct Importer Outreach (USA, UK, Germany, Turkey, UAE), Alibaba & Global Sources Supplier Sync, Educational SEO Guides",
       "phase": "Phase 2",
       "status": "In Progress"
     },
     {
-      "days": "Days 61\u201390",
+      "days": "Days 61–90",
       "kpis": "Target > 14% RFQ-to-Confirmed-Order Conversion",
       "focus": "Buyer-Intent Google Ads Testing in USA/EU, RFQ-to-Quote Conversion Optimization & Repeat Container Contracts",
       "phase": "Phase 3",
@@ -1540,7 +1540,7 @@
   ],
   "adminAccounts": [],
   "securitySettings": {
-    "dashboardScreenshotProtection": false,
+    "dashboardScreenshotProtection": true,
     "productScreenshotProtection": true,
     "antiScreenRecordingBlur": true,
     "blockRightClickAndDrag": true,

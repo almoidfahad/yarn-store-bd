@@ -308,7 +308,17 @@ export function AdminDashboardClient({
   }
 
   return (
-    <ContentProtectionShield scope="dashboard" liveSettings={db.securitySettings}>
+    <ContentProtectionShield
+      scope="dashboard"
+      liveSettings={db.securitySettings}
+      onDisableShield={() =>
+        mutate(
+          'UPDATE_SECURITY_SETTINGS',
+          { dashboardScreenshotProtection: false },
+          'Admin Dashboard Shield turned OFF'
+        )
+      }
+    >
     <div className="ysb-admin-root min-h-screen flex bg-[#F3F6F4] text-[#17231C]">
       {/* Toast Notification */}
       {toast && (
@@ -433,8 +443,73 @@ export function AdminDashboardClient({
             ))}
           </select>
 
-          {/* Right Controls: Public Website Link, Bell (5), Language, Admin Profile */}
-          <div className="flex items-center gap-3 sm:gap-5">
+          {/* Right Controls: 1-Click Shield ON/OFF Buttons, Public Website Link, Bell, Admin Profile */}
+          <div className="flex items-center gap-2 sm:gap-3.5">
+            {/* Direct 1-Click Website Anti-Screenshot ON / OFF Button (Visible on all screens) */}
+            <button
+              type="button"
+              onClick={() => {
+                const nextVal = !db.securitySettings?.productScreenshotProtection;
+                try {
+                  localStorage.setItem('ysb_shield_mode', nextVal ? 'on' : 'off');
+                } catch {}
+                mutate(
+                  'UPDATE_SECURITY_SETTINGS',
+                  { productScreenshotProtection: nextVal },
+                  `Website Anti-Screenshot Shield turned ${nextVal ? 'ON' : 'OFF'}`
+                );
+              }}
+              title="1-Click Toggle: Website & Product Anti-Screenshot Shield ON / OFF"
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-extrabold border transition ${
+                db.securitySettings?.productScreenshotProtection
+                  ? 'bg-[#063B19] text-emerald-100 border-emerald-500/50 hover:bg-[#085D28]'
+                  : 'bg-amber-50 text-amber-800 border-amber-300 hover:bg-amber-100'
+              }`}
+            >
+              {db.securitySettings?.productScreenshotProtection ? (
+                <>
+                  <Shield className="w-3.5 h-3.5 text-amber-400" />
+                  <span>Web Shield: ON</span>
+                </>
+              ) : (
+                <>
+                  <ShieldOff className="w-3.5 h-3.5 text-amber-700" />
+                  <span>Web Shield: OFF</span>
+                </>
+              )}
+            </button>
+
+            {/* Direct 1-Click Admin Panel Shield ON / OFF Button (OFF by default) */}
+            <button
+              type="button"
+              onClick={() => {
+                const nextVal = !db.securitySettings?.dashboardScreenshotProtection;
+                mutate(
+                  'UPDATE_SECURITY_SETTINGS',
+                  { dashboardScreenshotProtection: nextVal },
+                  `Admin Panel Shield turned ${nextVal ? 'ON' : 'OFF'}`
+                );
+              }}
+              title="1-Click Toggle: Admin Dashboard Anti-Screenshot Shield ON / OFF"
+              className={`hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-extrabold border transition ${
+                db.securitySettings?.dashboardScreenshotProtection
+                  ? 'bg-emerald-950 text-emerald-200 border-emerald-700 hover:bg-emerald-900'
+                  : 'bg-slate-100 text-slate-600 border-slate-200 hover:bg-slate-200'
+              }`}
+            >
+              {db.securitySettings?.dashboardScreenshotProtection ? (
+                <>
+                  <Shield className="w-3.5 h-3.5 text-amber-400" />
+                  <span>Admin Shield: ON</span>
+                </>
+              ) : (
+                <>
+                  <ShieldOff className="w-3.5 h-3.5 text-slate-500" />
+                  <span>Admin Shield: OFF</span>
+                </>
+              )}
+            </button>
+
             <div className="hidden xl:flex items-center gap-2 text-xs">
               <Link
                 href="/"
@@ -448,28 +523,6 @@ export function AdminDashboardClient({
               >
                 Buyer Portal <ExternalLink className="w-3 h-3" />
               </Link>
-              <button
-                type="button"
-                onClick={() => setActiveTab('settings')}
-                title="Configure Anti-Screenshot & Recording Shield in Settings"
-                className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-full font-bold transition ${
-                  db.securitySettings?.dashboardScreenshotProtection
-                    ? 'bg-emerald-950 text-emerald-200 hover:bg-emerald-900'
-                    : 'bg-amber-100 text-amber-800 hover:bg-amber-200'
-                }`}
-              >
-                {db.securitySettings?.dashboardScreenshotProtection ? (
-                  <>
-                    <Shield className="w-3 h-3 text-amber-400" />
-                    <span>Shield ON</span>
-                  </>
-                ) : (
-                  <>
-                    <ShieldOff className="w-3 h-3" />
-                    <span>Shield OFF</span>
-                  </>
-                )}
-              </button>
             </div>
 
             <button

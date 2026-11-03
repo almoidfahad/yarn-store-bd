@@ -7,7 +7,7 @@ export interface SecuritySettings {
 }
 
 export const DEFAULT_SECURITY_SETTINGS: SecuritySettings = {
-  dashboardScreenshotProtection: true,
+  dashboardScreenshotProtection: false,
   productScreenshotProtection: true,
   antiScreenRecordingBlur: true,
   blockRightClickAndDrag: true,

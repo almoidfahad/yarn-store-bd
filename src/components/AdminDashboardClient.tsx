@@ -301,7 +301,10 @@ export function AdminDashboardClient({
   if (!adminUser) {
     return (
       <ContentProtectionShield scope="dashboard" liveSettings={db.securitySettings}>
-        <AdminLoginGate onAuthenticated={(user) => setAdminUser(user)} />
+        <AdminLoginGate
+          hasRegisteredAdmins={Array.isArray(db.adminAccounts) && db.adminAccounts.length > 0}
+          onAuthenticated={(user) => setAdminUser(user)}
+        />
       </ContentProtectionShield>
     );
   }

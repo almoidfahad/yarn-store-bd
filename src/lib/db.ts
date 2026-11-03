@@ -253,7 +253,20 @@ export interface ChecklistItem {
   completed: boolean;
 }
 
+export interface AdminAccountRecord {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  passwordSalt: string;
+  passwordHash: string;
+  provider: 'email' | 'linkedin' | 'google' | 'facebook' | 'twitter';
+  createdAt: string;
+  lastLoginAt?: string;
+}
+
 export interface PlatformDB {
+  adminAccounts: AdminAccountRecord[];
   securitySettings: SecuritySettings;
   companyProfile: {
     name: string;
@@ -1415,6 +1428,7 @@ const INITIAL_DB: PlatformDB = {
       kpis: 'Target > 14% RFQ-to-Confirmed-Order Conversion',
     },
   ],
+  adminAccounts: [],
   securitySettings: { ...DEFAULT_SECURITY_SETTINGS },
 };
 
@@ -1423,6 +1437,7 @@ function normalizeDB(parsed: Partial<PlatformDB> | null | undefined): PlatformDB
   return {
     ...INITIAL_DB,
     ...parsed,
+    adminAccounts: Array.isArray(parsed.adminAccounts) ? parsed.adminAccounts : [],
     securitySettings: {
       ...DEFAULT_SECURITY_SETTINGS,
       ...(parsed.securitySettings || {}),
